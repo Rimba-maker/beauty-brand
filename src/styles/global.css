@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Phase 2 will populate this with the full Clay token port. */
+/* For Phase 1 verification only. */
+@theme {
+  --color-canvas: #fffaf0;
+  --color-ink: #0a0a0a;
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: 'Inter', system-ui, sans-serif;
+}
