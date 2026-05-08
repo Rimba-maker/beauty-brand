@@ -1,28 +1,66 @@
 ---
-import { INGREDIENTS, type Ingredient } from '~/data/content';
+import { INGREDIENTS } from '~/data/content';
 
-type Variant = Ingredient['cardVariant'];
+const portraitImages = [
+  'https://images.unsplash.com/photo-1556228720-195a672e8a03?w=600&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=600&auto=format&fit=crop&q=80',
+];
 
-const cardBg: Record<Variant, string> = {
-  lavender: 'bg-brand-lavender',
-  peach: 'bg-brand-peach',
-  ochre: 'bg-brand-ochre',
-};
+const eyebrows = ['Hydration', 'Repair', 'Brightening'];
 ---
 
-<section id="ingredients" class="px-6">
-  <div class="mx-auto max-w-[var(--container-content)] py-section">
-    <div class="mb-12 max-w-2xl">
-      <p class="type-caption-uppercase text-muted">What's actually in there</p>
-      <h2 class="mt-2 type-display-lg text-ink">Three actives doing the heavy lifting.</h2>
+<section id="ingredients" class="relative overflow-hidden px-6 py-32">
+  <div class="mx-auto max-w-[var(--container-content)]">
+    <div class="max-w-3xl">
+      <p class="eyebrow-dot type-eyebrow text-ink">Actives</p>
+      <h2 class="mt-4 type-h2 text-ink">Three actives doing the heavy lifting.</h2>
     </div>
 
-    <ul class="grid gap-6 md:grid-cols-3">
-      {INGREDIENTS.map((ing) => (
-        <li class={`${cardBg[ing.cardVariant]} rounded-xl p-8 text-ink`}>
-          <span class="text-5xl" aria-hidden="true">{ing.emoji}</span>
-          <h3 class="mt-6 type-title-lg">{ing.name}</h3>
-          <p class="mt-3 type-body-md">{ing.description}</p>
+    <svg
+      class="pointer-events-none absolute inset-x-0 top-1/2 hidden h-32 w-full lg:block"
+      viewBox="0 0 1280 200"
+      preserveAspectRatio="none"
+      fill="none"
+      stroke="var(--color-signal-orange-light)"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <path d="M 200 100 Q 400 20, 640 100 T 1080 100" />
+    </svg>
+
+    <ul class="relative mt-20 grid gap-y-24 lg:grid-cols-3 lg:gap-x-12">
+      {INGREDIENTS.map((ing, i) => (
+        <li class={`flex flex-col items-center text-center ${i === 1 ? 'lg:translate-y-16' : ''}`}>
+          <div class="relative">
+            <div
+              class="overflow-hidden bg-lifted"
+              style="width: 280px; height: 280px; border-radius: var(--radius-circle);"
+            >
+              <img
+                src={portraitImages[i]}
+                alt={ing.name}
+                width="280"
+                height="280"
+                loading="lazy"
+                class="h-full w-full object-cover"
+              />
+            </div>
+            <button
+              aria-label={`Learn about ${ing.name}`}
+              class="absolute bottom-2 right-2 inline-flex h-16 w-16 items-center justify-center bg-white"
+              style="border-radius: var(--radius-circle); box-shadow: var(--shadow-nav);"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12" />
+                <polyline points="12 5 19 12 12 19" />
+              </svg>
+            </button>
+          </div>
+
+          <p class="eyebrow-dot mt-8 type-eyebrow text-ink">{eyebrows[i]}</p>
+          <h3 class="mt-3 type-h3 text-ink">{ing.name}</h3>
+          <p class="mt-3 max-w-xs type-body text-slate">{ing.description}</p>
         </li>
       ))}
     </ul>

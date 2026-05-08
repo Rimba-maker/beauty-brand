@@ -2,58 +2,40 @@
 import { BRAND } from '~/data/content';
 ---
 
-<section class="relative overflow-hidden">
-  <div class="mx-auto max-w-[var(--container-content)] px-6 py-section">
-    <div class="grid items-center gap-12 lg:grid-cols-12">
-      <div class="lg:col-span-7">
-        <div class="mb-6 flex flex-wrap gap-2">
-          {BRAND.promiseBadges.map((label) => (
-            <span class="rounded-pill bg-surface-card px-3 py-1 type-caption text-ink">
-              {label}
-            </span>
-          ))}
-        </div>
+<section class="relative px-6 py-12 lg:py-16">
+  <div class="mx-auto max-w-[var(--container-content)]">
+    <p class="eyebrow-dot type-eyebrow text-ink">A New Beauty Ritual</p>
 
-        <h1 class="type-display-xl text-ink">
-          {BRAND.tagline}
-        </h1>
+    <h1 class="mt-6 type-h1 text-ink max-w-4xl">
+      {BRAND.tagline}
+    </h1>
 
-        <p class="mt-6 max-w-xl type-body-md text-body">
-          {BRAND.subtagline}
-        </p>
+    <p class="mt-8 max-w-xl type-body text-ink">
+      {BRAND.subtagline}
+    </p>
 
-        <div class="mt-8 flex flex-wrap gap-3">
-          <button
-            class="h-11 rounded-md bg-primary px-5 type-button text-on-primary"
-          >
-            {BRAND.ctaPrimary}
-          </button>
-          <button
-            class="h-11 rounded-md border border-hairline bg-canvas px-5 type-button text-ink"
-          >
-            {BRAND.ctaSecondary}
-          </button>
-        </div>
-      </div>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <button
+        class="rounded-button border-2 border-ink bg-ink px-6 py-2 type-button text-canvas"
+      >
+        {BRAND.ctaPrimary}
+      </button>
+      <button
+        class="rounded-button border-2 border-ink bg-white px-6 py-2 type-button text-ink"
+      >
+        {BRAND.ctaSecondary}
+      </button>
+    </div>
 
-      <div class="lg:col-span-5">
-        <div class="relative">
-          <div
-            class="absolute -inset-8 -z-10 rounded-full opacity-60"
-            style="background: radial-gradient(circle at 30% 30%, var(--color-brand-peach), transparent 60%), radial-gradient(circle at 70% 70%, var(--color-brand-pink), transparent 50%);"
-          ></div>
-          <div class="overflow-hidden rounded-xl bg-surface-soft">
-            <img
-              src={BRAND.heroImageUrl}
-              alt="Dewy makeup model"
-              width="800"
-              height="900"
-              loading="eager"
-              class="aspect-[4/5] w-full object-cover"
-            />
-          </div>
-        </div>
-      </div>
+    <div class="mt-16 overflow-hidden bg-ink" style="border-radius: var(--radius-stadium);">
+      <img
+        src={BRAND.heroImageUrl}
+        alt="DEWY CO. ritual"
+        width="1600"
+        height="900"
+        loading="eager"
+        class="h-[50vh] w-full object-cover lg:h-[65vh]"
+      />
     </div>
   </div>
 </section>
