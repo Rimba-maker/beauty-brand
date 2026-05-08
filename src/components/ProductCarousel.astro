@@ -1,0 +1,81 @@
+---
+import { PRODUCTS, type CardVariant } from '~/data/content';
+
+const cardBg: Record<CardVariant, string> = {
+  pink: 'bg-brand-pink',
+  teal: 'bg-brand-teal',
+  lavender: 'bg-brand-lavender',
+  peach: 'bg-brand-peach',
+  ochre: 'bg-brand-ochre',
+  cream: 'bg-surface-card',
+};
+
+const cardText: Record<CardVariant, string> = {
+  pink: 'text-on-primary',
+  teal: 'text-on-dark',
+  lavender: 'text-ink',
+  peach: 'text-ink',
+  ochre: 'text-ink',
+  cream: 'text-ink',
+};
+
+const buttonOnColor: Record<CardVariant, string> = {
+  pink: 'bg-canvas text-ink',
+  teal: 'bg-canvas text-ink',
+  lavender: 'bg-ink text-on-primary',
+  peach: 'bg-ink text-on-primary',
+  ochre: 'bg-ink text-on-primary',
+  cream: 'bg-ink text-on-primary',
+};
+---
+
+<section id="products" class="overflow-hidden">
+  <div class="mx-auto max-w-[var(--container-content)] px-6 py-section">
+    <div class="mb-12 flex flex-wrap items-end justify-between gap-4">
+      <div>
+        <p class="type-caption-uppercase text-muted">The collection</p>
+        <h2 class="mt-2 type-display-lg text-ink">Six hero products. Zero filler.</h2>
+      </div>
+      <a href="#" class="type-button text-ink underline-offset-4 hover:underline">
+        Shop all →
+      </a>
+    </div>
+
+    <div class="-mx-6 overflow-x-auto px-6 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <ul class="flex snap-x snap-mandatory gap-6">
+        {PRODUCTS.map((product) => (
+          <li
+            class={`${cardBg[product.cardVariant]} ${cardText[product.cardVariant]} flex w-[320px] shrink-0 snap-start flex-col rounded-xl p-8`}
+          >
+            <div class="aspect-[4/5] w-full overflow-hidden rounded-lg bg-canvas/10">
+              <img
+                src={product.imageUrl}
+                alt={product.name}
+                width="320"
+                height="400"
+                loading="lazy"
+                class="h-full w-full object-cover"
+              />
+            </div>
+
+            <div class="mt-6 flex flex-1 flex-col">
+              <h3 class="type-title-md">{product.name}</h3>
+              <p class={`mt-2 type-body-sm ${product.cardVariant === 'pink' || product.cardVariant === 'teal' ? 'opacity-90' : 'opacity-80'}`}>
+                {product.tagline}
+              </p>
+
+              <div class="mt-6 flex items-center justify-between">
+                <span class="type-title-lg">{product.price}</span>
+                <button
+                  class={`${buttonOnColor[product.cardVariant]} h-9 rounded-md px-4 type-button`}
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,39 @@
+---
+import { BRAND, FOOTER } from '~/data/content';
+---
+
+<footer class="bg-surface-soft px-6">
+  <div class="mx-auto max-w-[var(--container-content)] py-20">
+    <div class="grid gap-12 md:grid-cols-12">
+      <div class="md:col-span-4">
+        <p class="type-display-sm text-ink">{BRAND.name}</p>
+        <p class="mt-4 max-w-xs type-body-sm text-body">{BRAND.subtagline}</p>
+      </div>
+
+      <div class="grid gap-8 sm:grid-cols-2 md:col-span-8 md:grid-cols-4">
+        {FOOTER.columns.map((col) => (
+          <div>
+            <p class="type-caption-uppercase text-ink">{col.heading}</p>
+            <ul class="mt-4 space-y-3">
+              {col.links.map((link) => (
+                <li>
+                  <a href={link.href} class="type-body-sm text-body hover:text-ink">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-hairline pt-8">
+      <p class="type-body-sm text-muted">{FOOTER.tagline}</p>
+      <div class="flex gap-6">
+        <a href="#" class="type-body-sm text-muted hover:text-ink">Privacy</a>
+        <a href="#" class="type-body-sm text-muted hover:text-ink">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>

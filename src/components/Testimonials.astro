@@ -1,0 +1,37 @@
+---
+import { TESTIMONIALS } from '~/data/content';
+---
+
+<section id="testimonials" class="px-6">
+  <div class="mx-auto max-w-[var(--container-content)] py-section">
+    <div class="mb-12 max-w-2xl">
+      <p class="type-caption-uppercase text-muted">Word on the street</p>
+      <h2 class="mt-2 type-display-lg text-ink">
+        From editors, makeup artists, and people who just like their skin.
+      </h2>
+    </div>
+
+    <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {TESTIMONIALS.map((t) => (
+        <li class="flex flex-col rounded-lg bg-surface-card p-6">
+          <p class="type-body-md text-ink flex-1">"{t.quote}"</p>
+
+          <div class="mt-6 flex items-center gap-3">
+            <img
+              src={t.avatarUrl}
+              alt={t.name}
+              width="48"
+              height="48"
+              loading="lazy"
+              class="h-12 w-12 rounded-full object-cover"
+            />
+            <div>
+              <p class="type-title-sm text-ink">{t.name}</p>
+              <p class="type-caption text-muted">{t.role}</p>
+            </div>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
