@@ -1,5 +1,14 @@
 ---
 import '~/styles/global.css';
+import TopNav from '~/components/TopNav.astro';
+import Hero from '~/components/Hero.astro';
+import ProductCarousel from '~/components/ProductCarousel.astro';
+import FeaturedProduct from '~/components/FeaturedProduct.astro';
+import BrandStory from '~/components/BrandStory.astro';
+import Testimonials from '~/components/Testimonials.astro';
+import IngredientSpotlight from '~/components/IngredientSpotlight.astro';
+import EmailCapture from '~/components/EmailCapture.astro';
+import Footer from '~/components/Footer.astro';
 ---
 
 <!doctype html>
@@ -9,58 +18,23 @@ import '~/styles/global.css';
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>DEWY CO. — Token verification</title>
+    <title>DEWY CO. — Dewy skin, made fun.</title>
+    <meta
+      name="description"
+      content="Botanical-powered makeup that loves your skin back. Cruelty-free, vegan, made with intention."
+    />
   </head>
   <body>
-    <main class="mx-auto max-w-[var(--container-content)] px-6 py-section">
-      <h1 class="type-display-xl">Phase 2: tokens working</h1>
-      <p class="type-body-md mt-4 text-body">Cream canvas, Inter 500 with -2.5px letter-spacing.</p>
-
-      <section class="mt-section">
-        <h2 class="type-display-md mb-6">Brand color palette</h2>
-        <div class="grid grid-cols-3 gap-4 sm:grid-cols-7">
-          <div class="rounded-xl bg-brand-pink p-6 text-on-primary type-title-sm">pink</div>
-          <div class="rounded-xl bg-brand-teal p-6 text-on-dark type-title-sm">teal</div>
-          <div class="rounded-xl bg-brand-lavender p-6 text-ink type-title-sm">lavender</div>
-          <div class="rounded-xl bg-brand-peach p-6 text-ink type-title-sm">peach</div>
-          <div class="rounded-xl bg-brand-ochre p-6 text-ink type-title-sm">ochre</div>
-          <div class="rounded-xl bg-brand-mint p-6 text-ink type-title-sm">mint</div>
-          <div class="rounded-xl bg-brand-coral p-6 text-on-primary type-title-sm">coral</div>
-        </div>
-      </section>
-
-      <section class="mt-section">
-        <h2 class="type-display-md mb-6">Surface scale</h2>
-        <div class="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          <div class="rounded-lg bg-canvas p-6 type-body-sm border border-hairline">canvas</div>
-          <div class="rounded-lg bg-surface-soft p-6 type-body-sm">surface-soft</div>
-          <div class="rounded-lg bg-surface-card p-6 type-body-sm">surface-card</div>
-          <div class="rounded-lg bg-surface-strong p-6 type-body-sm">surface-strong</div>
-        </div>
-      </section>
-
-      <section class="mt-section">
-        <h2 class="type-display-md mb-6">Typography hierarchy</h2>
-        <div class="space-y-3">
-          <p class="type-display-xl">display-xl 72/500</p>
-          <p class="type-display-lg">display-lg 56/500</p>
-          <p class="type-display-md">display-md 40/500</p>
-          <p class="type-display-sm">display-sm 32/500</p>
-          <p class="type-title-lg">title-lg 24/600</p>
-          <p class="type-title-md">title-md 18/600</p>
-          <p class="type-body-md text-body">body-md 16/400 — running text in --color-body</p>
-          <p class="type-caption-uppercase text-muted">caption-uppercase 12/600</p>
-        </div>
-      </section>
-
-      <section class="mt-section pb-section">
-        <h2 class="type-display-md mb-6">Buttons</h2>
-        <div class="flex flex-wrap gap-3">
-          <button class="rounded-md bg-primary px-5 py-3 type-button text-on-primary h-11">Primary CTA</button>
-          <button class="rounded-md border border-hairline bg-canvas px-5 py-3 type-button text-ink h-11">Secondary</button>
-          <span class="rounded-pill bg-surface-card px-3 py-1 type-caption text-ink">badge-pill</span>
-        </div>
-      </section>
+    <TopNav />
+    <main>
+      <Hero />
+      <ProductCarousel />
+      <FeaturedProduct />
+      <BrandStory />
+      <Testimonials />
+      <IngredientSpotlight />
+      <EmailCapture />
     </main>
+    <Footer />
   </body>
 </html>

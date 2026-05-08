@@ -41,11 +41,35 @@ These come from Clay's DESIGN.md and the test contract. Violations invalidate th
 
 ## Phase status
 
-- [x] Phase 1 — Scaffold (Astro + Tailwind v4 + DESIGN.md copy)
-- [ ] Phase 2 — Token port to `@theme`
-- [ ] Phase 3 — Content + data layer
-- [ ] Phase 4 — Build 9 components
-- [ ] Phase 5 — Compose + responsive QA
+- [x] Phase 1 — Scaffold (Astro + Tailwind v4 + DESIGN.md copy) — commit `cad6015`
+- [x] Phase 2 — Token port to `@theme` — commit `a2c4721`
+- [x] Phase 3 — Content + data layer — commit `0e4d47c`
+- [x] Phase 4 — Build 9 components — commit `3076527`
+- [x] Phase 5 — Compose + responsive QA — pending final commit
+
+## Audit results (Phase 5)
+
+- Zero hex codes outside `src/styles/global.css`
+- Zero `font-bold` / `font-extrabold` / `font-black` anywhere
+- Footer uses `bg-surface-soft` (cream), NOT dark
+- Carousel color rotation: pink → teal → lavender → peach → ochre → cream
+- All sections use `py-section` (96px) rhythm
+- `pnpm check` 0 errors / 0 warnings
+- `pnpm build` 1.07s, 1 page
+
+## How to run
+
+```powershell
+pnpm install   # only first time
+pnpm dev       # http://localhost:4321
+pnpm build     # static output to dist/
+pnpm check     # type + Astro check
+```
+
+## Known asset risks
+
+- Unsplash photo IDs in `src/data/content.ts` are educated guesses. If any 404 in browser, swap the photo ID for a working one. The HTML/CSS structure is stable — only the URLs may need tweaking.
+- Pravatar avatars (`i.pravatar.cc/200?img=N`) for testimonials — these are stable and randomized per N value.
 
 ## Out of scope
 
