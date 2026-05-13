@@ -5,13 +5,25 @@ A test project for evaluating how strongly a `DESIGN.md` from the [awesome-desig
 ## What this is
 
 - **Brand (fictional):** DEWY CO. — millennial botanical-powered makeup
-- **Source DESIGN.md:** [Clay](https://getdesign.md/clay/design-md) — B2B GTM-data SaaS, copied verbatim to `./DESIGN.md`
-- **Test goal:** Does Clay's spec (cream canvas, saturated 6-color cards, rounded display type) translate into a convincing beauty brand landing when faithfully applied?
+- **Test goal:** Does a non-beauty `DESIGN.md` translate into a convincing beauty brand landing when faithfully applied?
 
-## Spec & Plan
+## Branches
+
+This repo holds **A/B variants** of the same beauty brand using two different `DESIGN.md` files. The composition (9 sections) and content (`src/data/content.ts`) are identical across branches. Only the design system swaps.
+
+| Branch | DESIGN.md source | Vibe | Status |
+|--------|------------------|------|--------|
+| `master` | [Clay](https://getdesign.md/clay/design-md) — B2B GTM-data SaaS | Cream canvas + 6 saturated brand colors + rounded display | shipped, 5 commits |
+| `mastercard` | [Mastercard](https://getdesign.md/mastercard/design-md) — global payments | Warm putty cream + ink black + circular portraits + dark footer + pill shapes | active branch |
+
+`git checkout master` to see Clay variant. `git checkout mastercard` for Mastercard variant.
+
+## Spec & Plan (master / Clay variant)
 
 - Design spec: `docs/superpowers/specs/2026-05-08-beauty-brand-design.md`
 - Implementation plan: `docs/superpowers/specs/2026-05-08-beauty-brand-plan.md`
+
+The Mastercard branch reuses the same composition but adapts components to Mastercard's vocabulary — see "Mastercard adaptations" below.
 
 ## Stack
 
@@ -20,42 +32,58 @@ A test project for evaluating how strongly a `DESIGN.md` from the [awesome-desig
 - TypeScript strict
 - pnpm 10
 
-## Rules of engagement (do not violate)
+## Mastercard adaptations (this branch)
 
-These come from Clay's DESIGN.md and the test contract. Violations invalidate the experiment.
+Mastercard's spec required structural changes, not just color swaps:
 
-1. **Do not modify `DESIGN.md`.** It is the source of truth, copied verbatim from the repo.
-2. **No off-token colors.** Every color must come from the `@theme` block in `src/styles/global.css`.
-3. **No display weight > 500.** Clay's display type stays at 500. Bold (700) is system violation.
-4. **Cream footer only.** No dark footer (Clay rule, line 312 in DESIGN.md).
-5. **No adjacent same-color cards.** ProductCarousel rotation must be: pink → teal → lavender → peach → ochre → cream.
-6. **No custom hover states.** Clay spec line 500.
-7. **96px section rhythm.** Token `spacing.section` between bands.
-8. **Cream canvas `#fffaf0`.** Never replace with cool gray.
+| Component | Clay original | Mastercard variant |
+|-----------|---------------|---------------------|
+| TopNav | Sticky 64h cream bar | Floating white pill, 999px radius, fixed below viewport top with shadow |
+| Hero | 7/5 split with cream rounded card | Text section + stadium media frame (40px radius all corners) full-bleed below |
+| ProductCarousel | 6 saturated rotation cards | 6 pill-shaped cards (999px radius), full-bleed photo, white chip + ink pill CTA inside |
+| FeaturedProduct | Peach card | Stadium frame 40px on dark ink with ingredient pill chips |
+| BrandStory | Plain editorial | Editorial with ghost watermark headline (cream-on-cream layered) |
+| Testimonials | 4-up cream cards | Circular portraits (220px) with white satellite CTA + asymmetric vertical offset |
+| IngredientSpotlight | 3-up brand-color cards | Circular portraits (280px) with satellite CTA + decorative orange orbital arc |
+| EmailCapture | cream surface band with rounded-md input | Lifted cream stadium frame with pill input (999px) and ink pill CTA |
+| Footer | **Cream surface-soft** (Clay rule) | **Dark ink #141413** (Mastercard rule, opposite of Clay) |
 
-## Off-spec deviations (logged here intentionally)
+## Rules of engagement (Mastercard branch)
 
-- **Plain Black font → Inter 500 + -0.05em letter-spacing.** Plain Black is licensed to Clay; Inter 500 is the substitute Clay's own spec recommends (DESIGN.md line 377).
-- **3D claymation illustrations → CSS gradient blobs + emoji + Unsplash photography.** Clay's signature 3D illustrations are commissioned assets, not available. Spec calls this out as a deviation.
-- **Asset realism via Unsplash.** Real product photos are not available for a fictional brand. Acknowledged as a confounding variable in the test (the visual quality may come from photo quality, not just from DESIGN.md fidelity).
+These come from Mastercard DESIGN.md and override the Clay rules on this branch:
 
-## Phase status
+1. **Canvas Cream `#F3F0EE`** — never pure white, never cool gray
+2. **Dark ink footer `#141413`** — opposite of Clay, but Mastercard non-negotiable
+3. **Body weight 450** — half-step weight is signature; do not flatten to 400
+4. **Headlines weight 500 with -2% tracking** — never bold
+5. **Three radii: 20px (buttons), 40px (stadium frames), 999px (pills/circles)** — no 8/12/16
+6. **Mask service imagery as perfect circles** — not rounded rectangles
+7. **Eyebrow labels carry the • accent dot** — uppercase, 14px / 700 / +4% tracking
+8. **Signal Orange `#CF4500` reserved for compliance/consent only** — NOT for marketing CTAs
+9. **Light Signal Orange `#F37338` for orbital decorative arcs only** — never body text
+10. **Mastercard logo red/yellow are brand mark only** — never UI palette
 
-- [x] Phase 1 — Scaffold (Astro + Tailwind v4 + DESIGN.md copy) — commit `cad6015`
-- [x] Phase 2 — Token port to `@theme` — commit `a2c4721`
-- [x] Phase 3 — Content + data layer — commit `0e4d47c`
-- [x] Phase 4 — Build 9 components — commit `3076527`
-- [x] Phase 5 — Compose + responsive QA — pending final commit
+## Off-spec deviations
 
-## Audit results (Phase 5)
+- **Sofia Sans → MarkForMC**: Mastercard's own recommended open-source substitute (DESIGN.md line 86). Loaded via Google Fonts at weights 400/450/500/700.
+- **Asset realism via Unsplash**: educated-guess photo IDs, some may 404.
+- **Pravatar avatars** for testimonials.
+- **Ghost watermark** uses lighter cream `#E8E2DA` (Mastercard spec says it varies between `#E8E2DA` and `#D1CDC7`).
+
+## Phase status (Mastercard branch)
+
+- [x] Phase A — Token swap (DESIGN.md + @theme + Sofia Sans)
+- [x] Phase B — Refactor 9 components to Mastercard vocabulary
+- [x] Phase C — Compose verified, audit passed, commit pending
+
+## Audit results (Mastercard branch)
 
 - Zero hex codes outside `src/styles/global.css`
-- Zero `font-bold` / `font-extrabold` / `font-black` anywhere
-- Footer uses `bg-surface-soft` (cream), NOT dark
-- Carousel color rotation: pink → teal → lavender → peach → ochre → cream
-- All sections use `py-section` (96px) rhythm
+- Footer uses `bg-ink` (dark) — correct for Mastercard
+- All radii from defined scale (20 / 40 / 999 / 50%)
+- Eyebrow dots present via `.eyebrow-dot` helper class
 - `pnpm check` 0 errors / 0 warnings
-- `pnpm build` 1.07s, 1 page
+- `pnpm build` 1.14s
 
 ## How to run
 
@@ -64,13 +92,8 @@ pnpm install   # only first time
 pnpm dev       # http://localhost:4321
 pnpm build     # static output to dist/
 pnpm check     # type + Astro check
+
+# Switch between variants
+git checkout master      # Clay variant
+git checkout mastercard  # Mastercard variant
 ```
-
-## Known asset risks
-
-- Unsplash photo IDs in `src/data/content.ts` are educated guesses. If any 404 in browser, swap the photo ID for a working one. The HTML/CSS structure is stable — only the URLs may need tweaking.
-- Pravatar avatars (`i.pravatar.cc/200?img=N`) for testimonials — these are stable and randomized per N value.
-
-## Out of scope
-
-See spec section 9. Briefly: no animations, no form backend, no mobile slide-out menu, no dark mode, no multi-page, no tests.

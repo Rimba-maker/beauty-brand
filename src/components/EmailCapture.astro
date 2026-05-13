@@ -2,32 +2,27 @@
 import { EMAIL_CAPTURE } from '~/data/content';
 ---
 
-<section class="px-6">
-  <div class="mx-auto max-w-[var(--container-content)] pb-section">
-    <div class="relative overflow-hidden rounded-xl bg-surface-soft p-12 lg:p-20">
-      <div
-        class="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full opacity-50"
-        style="background: radial-gradient(circle, var(--color-brand-lavender), transparent 70%);"
-      ></div>
-      <div
-        class="pointer-events-none absolute -bottom-24 -left-16 h-80 w-80 rounded-full opacity-40"
-        style="background: radial-gradient(circle, var(--color-brand-peach), transparent 70%);"
-      ></div>
+<section class="px-6 py-12">
+  <div class="mx-auto max-w-[var(--container-content)]">
+    <div
+      class="bg-lifted px-8 py-20 lg:px-20"
+      style="border-radius: var(--radius-stadium);"
+    >
+      <div class="max-w-2xl">
+        <p class="eyebrow-dot type-eyebrow text-ink">{EMAIL_CAPTURE.eyebrow}</p>
+        <h2 class="mt-4 type-h2 text-ink">{EMAIL_CAPTURE.headline}</h2>
+        <p class="mt-6 type-body text-slate">{EMAIL_CAPTURE.body}</p>
 
-      <div class="relative max-w-2xl">
-        <p class="type-caption-uppercase text-muted">{EMAIL_CAPTURE.eyebrow}</p>
-        <h2 class="mt-3 type-display-md text-ink">{EMAIL_CAPTURE.headline}</h2>
-        <p class="mt-4 type-body-md text-body">{EMAIL_CAPTURE.body}</p>
-
-        <form class="mt-8 flex flex-col gap-3 sm:flex-row" onsubmit="return false;">
+        <form class="mt-10 flex flex-col gap-3 sm:flex-row" onsubmit="return false;">
           <input
             type="email"
             placeholder={EMAIL_CAPTURE.placeholder}
-            class="h-11 flex-1 rounded-md border border-hairline bg-canvas px-4 type-body-md text-ink"
+            class="flex-1 border-2 border-ink/20 bg-white px-6 py-3 type-body text-ink"
+            style="border-radius: var(--radius-pill);"
           />
           <button
             type="submit"
-            class="h-11 rounded-md bg-primary px-6 type-button text-on-primary"
+            class="rounded-button border-2 border-ink bg-ink px-8 py-3 type-button text-canvas"
           >
             {EMAIL_CAPTURE.cta}
           </button>
