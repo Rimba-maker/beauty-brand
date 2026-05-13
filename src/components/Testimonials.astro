@@ -11,13 +11,13 @@ const eyebrows = ['Editor', 'Creator', 'Artist', 'Customer'];
       From editors, makeup artists, and people who just like their skin.
     </h2>
 
-    <ul class="mt-20 grid gap-x-8 gap-y-20 sm:grid-cols-2 lg:grid-cols-4">
+    <ul class="mt-16 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-4">
       {TESTIMONIALS.map((t, i) => (
         <li class={`flex flex-col ${i % 2 === 1 ? 'lg:translate-y-12' : ''}`}>
           <div class="relative mx-auto">
             <div
               class="overflow-hidden bg-lifted"
-              style="width: 220px; height: 220px; border-radius: var(--radius-circle);"
+              style="width: clamp(150px, 38vw, 220px); height: clamp(150px, 38vw, 220px); border-radius: var(--radius-circle);"
             >
               <img
                 src={t.avatarUrl.replace('200', '400')}
@@ -30,8 +30,8 @@ const eyebrows = ['Editor', 'Creator', 'Artist', 'Customer'];
             </div>
             <button
               aria-label={`Read more from ${t.name}`}
-              class="absolute -bottom-2 -right-2 inline-flex h-14 w-14 items-center justify-center bg-white"
-              style="border-radius: var(--radius-circle); box-shadow: var(--shadow-nav);"
+              class="absolute -bottom-2 -right-2 inline-flex items-center justify-center bg-white"
+              style="border-radius: var(--radius-circle); box-shadow: var(--shadow-nav); width: 44px; height: 44px; min-width: 44px; min-height: 44px;"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12" />

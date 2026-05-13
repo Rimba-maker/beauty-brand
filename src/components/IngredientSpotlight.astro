@@ -29,13 +29,13 @@ const eyebrows = ['Hydration', 'Repair', 'Brightening'];
       <path d="M 200 100 Q 400 20, 640 100 T 1080 100" />
     </svg>
 
-    <ul class="relative mt-20 grid gap-y-24 lg:grid-cols-3 lg:gap-x-12">
+    <ul class="relative mt-16 grid gap-y-16 lg:grid-cols-3 lg:gap-x-12 lg:mt-20 lg:gap-y-24">
       {INGREDIENTS.map((ing, i) => (
         <li class={`flex flex-col items-center text-center ${i === 1 ? 'lg:translate-y-16' : ''}`}>
           <div class="relative">
             <div
               class="overflow-hidden bg-lifted"
-              style="width: 280px; height: 280px; border-radius: var(--radius-circle);"
+              style="width: clamp(200px, 55vw, 280px); height: clamp(200px, 55vw, 280px); border-radius: var(--radius-circle);"
             >
               <img
                 src={portraitImages[i]}
@@ -48,8 +48,8 @@ const eyebrows = ['Hydration', 'Repair', 'Brightening'];
             </div>
             <button
               aria-label={`Learn about ${ing.name}`}
-              class="absolute bottom-2 right-2 inline-flex h-16 w-16 items-center justify-center bg-white"
-              style="border-radius: var(--radius-circle); box-shadow: var(--shadow-nav);"
+              class="absolute bottom-2 right-2 inline-flex items-center justify-center bg-white"
+              style="border-radius: var(--radius-circle); box-shadow: var(--shadow-nav); width: 48px; height: 48px; min-width: 44px; min-height: 44px;"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12" />

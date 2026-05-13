@@ -2,41 +2,63 @@
 import { BRAND } from '~/data/content';
 ---
 
-<header class="pointer-events-none fixed inset-x-0 top-6 z-50 px-6">
+<header class="pointer-events-none fixed inset-x-0 top-5 z-50 px-5">
   <nav
-    class="pointer-events-auto mx-auto flex max-w-[var(--container-tight)] items-center justify-between rounded-pill bg-white px-6 py-4 lg:px-10"
-    style="box-shadow: var(--shadow-nav);"
+    class="pointer-events-auto mx-auto flex max-w-[var(--container-tight)] items-center justify-between bg-white px-6 py-3 lg:px-8"
+    style="border-radius: var(--radius-pill); box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.06), 0px 0px 0px 1px rgba(0,0,0,0.04);"
   >
-    <a href="#" class="type-h3 tracking-tight text-ink">
+    <!-- Wordmark -->
+    <a
+      href="#"
+      class="text-ink"
+      style="font-family: var(--font-sans); font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;"
+    >
       {BRAND.name}
     </a>
 
-    <ul class="hidden gap-12 lg:flex">
+    <!-- Nav links — desktop -->
+    <ul class="hidden items-center gap-8 lg:flex">
       {BRAND.navLinks.map((link) => (
         <li>
-          <a href={link.href} class="type-nav-link text-ink">
+          <a
+            href={link.href}
+            class="text-ink transition-opacity hover:opacity-50"
+            style="font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: -0.01em;"
+          >
             {link.label}
           </a>
         </li>
       ))}
     </ul>
 
-    <div class="flex items-center gap-3">
+    <!-- Right actions -->
+    <div class="flex items-center gap-2">
+      <!-- Search icon — desktop only -->
       <button
         aria-label="Search"
-        class="hidden h-12 w-12 items-center justify-center rounded-circle border border-ink/20 lg:inline-flex"
+        class="hidden h-9 w-9 items-center justify-center text-ink opacity-60 transition-opacity hover:opacity-100 lg:inline-flex"
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
           <circle cx="11" cy="11" r="7" />
-          <line x1="21" y1="21" x2="16" y2="16" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
       </button>
 
-      <button class="lg:hidden" aria-label="Open menu">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <!-- Shop CTA — desktop -->
+      <a
+        href="#products"
+        class="hidden bg-ink text-canvas lg:inline-flex items-center"
+        style="border-radius: var(--radius-button); padding: 9px 20px; font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: 0.01em;"
+      >
+        Shop Now
+      </a>
+
+      <!-- Hamburger — mobile only -->
+      <button class="h-9 w-9 items-center justify-center text-ink lg:hidden inline-flex" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="4" y1="7" x2="20" y2="7" />
-          <line x1="4" y1="12" x2="20" y2="12" />
-          <line x1="4" y1="17" x2="20" y2="17" />
+          <line x1="4" y1="13" x2="20" y2="13" />
+          <line x1="4" y1="19" x2="20" y2="19" />
         </svg>
       </button>
     </div>
