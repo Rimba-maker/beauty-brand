@@ -23,3 +23,7 @@ yarn-error.log*
 
 # astro
 .astro/
+
+# internal documentation
+CLAUDE.md
+DESIGN.md
