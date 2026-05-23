@@ -11,17 +11,19 @@
     "check": "astro check"
   },
   "dependencies": {
-    "astro": "6.3.1",
-    "tailwindcss": "4.2.4",
-    "@tailwindcss/vite": "4.2.4"
+    "@tailwindcss/vite": "4.3.0",
+    "astro": "6.3.7",
+    "tailwindcss": "4.3.0"
   },
   "devDependencies": {
-    "@astrojs/check": "0.9.4",
-    "typescript": "5.7.3",
-    "@types/node": "25.6.2"
+    "@astrojs/check": "0.9.9",
+    "@types/node": "25.9.1",
+    "typescript": "6.0.3"
   },
   "packageManager": "pnpm@10.29.2",
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp"]
+    "overrides": {
+      "yaml": ">=2.8.3"
+    }
   }
 }
