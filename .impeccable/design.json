@@ -1,0 +1,143 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-12T00:00:00Z",
+  "title": "Design System: DEWY CO. — The Beauty Atelier",
+  "extensions": {
+    "colorMeta": {
+      "espresso": {"role": "primary", "displayName": "Espresso"},
+      "lavender": {"role": "primary", "displayName": "Lavender"},
+      "mauve": {"role": "secondary", "displayName": "Mauve"},
+      "plum": {"role": "secondary", "displayName": "Plum"},
+      "paper": {"role": "neutral", "displayName": "Paper"},
+      "muted": {"role": "neutral", "displayName": "Muted"},
+      "line": {"role": "neutral", "displayName": "Line"}
+    },
+    "typographyMeta": {
+      "display": {"displayName": "Campaign display", "purpose": "Desktop campaign heading; local responsive overrides at 1100px/800px, not every screen's heading."},
+      "headline": {"displayName": "Section headline", "purpose": "Reusable editorial section headings with regular/italic emphasis."},
+      "title": {"displayName": "Product title", "purpose": "Collection product names."},
+      "body": {"displayName": "Body baseline", "purpose": "Global default; supporting component copy has local overrides."},
+      "label": {"displayName": "Control label", "purpose": "Shared button and text-link labels."}
+    },
+    "shadows": [
+      {"name": "dialog", "value": "0 20px 80px #39291f26", "purpose": "Modal surface only."},
+      {"name": "toast", "value": "0 8px 24px #39291f20", "purpose": "Transient status feedback."}
+    ],
+    "motion": [
+      {"name": "ease-out", "value": "cubic-bezier(.16,1,.3,1)", "purpose": "Shared easing for campaign apertures, feedback, media, and dialog entrance."},
+      {"name": "button", "value": "background .25s, color .25s", "purpose": "Primary and outline controls; CSS default ease."},
+      {"name": "button-arrow", "value": "transform .18s var(--ease-out)", "purpose": "Shared button arrow moves translateX(4px) on hover or focus-visible."},
+      {"name": "navigation-underline", "value": "right .25s", "purpose": "Desktop link underline reveal; CSS default ease."},
+      {"name": "campaign-product", "value": "background .2s", "purpose": "Paper associated-product entry below the portrait changes to mauve on hover; CSS default ease."},
+      {"name": "campaign-opening-portrait", "value": "720ms; cubic-bezier(.16,1,.3,1)", "purpose": "One opening aperture: clip-path inset(10% 12% 10% 12%) to inset(0% 0% 0% 0%)."},
+      {"name": "campaign-opening-lines", "value": "600ms; delays 80ms/160ms; cubic-bezier(.16,1,.3,1)", "purpose": "Two headline lines rise from translateY(110%) to translateY(0), backwards fill during delay; the complete opening ends at 760ms."},
+      {"name": "campaign-selection", "value": "460ms; cubic-bezier(.16,1,.3,1)", "purpose": "Directional clip-path reveal after both incoming photograph and associated product decode; prior frame remains behind it and latest request wins."},
+      {"name": "collection-group", "value": ".36s var(--ease-out)", "purpose": "Native View Transition group continuity for individually named product cards; root snapshots do not animate and transition overlay ignores pointer input."},
+      {"name": "collection-out", "value": ".16s ease both", "purpose": "Outgoing collection-item opacity 1 to 0."},
+      {"name": "collection-in", "value": ".26s var(--ease-out) both", "purpose": "Incoming collection-item opacity 0 to 1 and blur(2px) to blur(0)."},
+      {"name": "product-image", "value": "transform .7s var(--ease-out)", "purpose": "Image-button hover scales the clipped image to 1.045."},
+      {"name": "dialog-in", "value": ".35s var(--ease-out)", "purpose": "Product/ritual entrance from opacity .5 and translateY(12px) to opacity 1 and translateY(0)."},
+      {"name": "bag-in", "value": ".38s var(--ease-out)", "purpose": "Right-edge bag drawer from opacity .7 and translateX(100%) to opacity 1 and translateX(0)."},
+      {"name": "bag-feedback", "value": "320ms; cubic-bezier(.16,1,.3,1)", "purpose": "Existing bag toggle background flashes lavender to transparent after an item/quantity/removal update."},
+      {"name": "mobile-menu", "value": "240ms; cubic-bezier(.16,1,.3,1)", "purpose": "Opening menu clip-path inset(0 0 100% 0) to inset(0 0 0 0)."},
+      {"name": "ritual-result", "value": "260ms; cubic-bezier(.16,1,.3,1)", "purpose": "Result arrival from opacity .65/blur(2px) to opacity 1/blur(0)."},
+      {"name": "shade-choice", "value": "background-color .16s, border-color .16s", "purpose": "Shade tile selection; CSS default ease."},
+      {"name": "ritual-option", "value": "background-color .18s, border-color .18s", "purpose": "Native checked-radio tile selection; CSS default ease."},
+      {"name": "scroll", "value": "smooth", "purpose": "HTML scroll behavior, with desktop scroll-padding-top 100px and 78px at 700px."},
+      {"name": "reduced-motion", "value": "@media(prefers-reduced-motion:reduce)", "purpose": "Disable all CSS animation and transitions with !important; html scroll-behavior:auto. Live preference changes cancel owned native animations and skip the active View Transition."},
+      {"name": "motion-lifecycle", "value": "visibilitychange; matchMedia change", "purpose": "Hidden documents cancel owned feedback/opening/reveal animations and skip collection View Transitions; campaign pending requests are invalidated and the current decoded edit settles. Hidden/reduced/unsupported states bypass motion; static campaign and initial collection content remain visible without JavaScript."}
+    ],
+    "breakpoints": [
+      {"name": "footer-small", "value": "480px", "condition": "max-width", "purpose": "Footer lower area becomes one column."},
+      {"name": "collection-small", "value": "600px", "condition": "max-width", "purpose": "Two-column products, stacked collection heading, 3/4 photos."},
+      {"name": "global-mobile", "value": "700px", "condition": "max-width", "purpose": "Section gutters/padding, button padding, stacked product details, full-width bag, one-column ritual options; featured ritual also stacks. Not a campaign breakpoint."},
+      {"name": "editorial-mobile", "value": "760px", "condition": "max-width", "purpose": "Story, ingredients, journal, newsletter component layout changes."},
+      {"name": "navigation-and-collection", "value": "800px", "condition": "max-width", "purpose": "Mobile navigation and intermediate collection gaps."},
+      {"name": "campaign-mobile", "value": "800px", "condition": "max-width", "purpose": "Campaign stacks with 6vw gutters and a 390px-tall portrait; heading clamp(43px,12vw,70px), 82px thumbnails, local 10px edit labels."},
+      {"name": "footer-medium", "value": "900px", "condition": "max-width", "purpose": "Footer two-column layout adaptations."},
+      {"name": "campaign-medium", "value": "1100px", "condition": "max-width", "purpose": "Campaign copy min-height 580px; heading clamp(42px,5.8vw,66px); thumbnails above labels, 70px thumbnail height, 350px media minimum height."},
+      {"name": "campaign-wide", "value": "1600px", "condition": "min-width", "purpose": "Campaign copy left-padding adjustment only."}
+    ],
+    "interaction": {
+      "focus": "2px solid var(--color-plum); outline-offset:5px",
+      "disabledButton": "opacity:.5; cursor:not-allowed",
+      "dialogBackdrop": "#39291f70",
+      "dialogPlacement": "Product and ritual modals explicitly use margin:auto to center within the viewport after Tailwind Preflight resets native margins. Bag overrides with margin:0 0 0 auto and fixed right-edge placement.",
+      "source": "src/styles/global.css, src/components/Hero.astro, src/components/ProductCarousel.astro, src/scripts/campaign.ts, src/scripts/motion.ts, src/scripts/storefront.ts; retained primitive previews derive from the built component styles.",
+      "localTypography": "Non-global component overrides, not additional primitives: navigation/filter labels 11px (filters 10px at 600px); collection titles 13px/11px, prices 12px/10px, product supporting copy 11px/10px, category/detail annotations 9px/8px (desktop/600px); notices 11px, collection disclosure 10px, bag/ritual supporting copy 12px. Campaign contact-sheet names 11px/10px at 1100px, edit numbers and photo/intro captions 10px, product price/action 11px, bottom caption/promise band 10px/9px (desktop/800px). The inherited 8px metadata is not a global reading size; advisory utility-size drift is recorded, not normalized in the UI.",
+      "campaign": "Three manual contact-sheet edits keep selected photograph, associated catalog product, price, accessible pressed state and live status synchronized. Loading retains the current usable edit; decode failure restores its selection and exposes retry guidance. This composition and motion are component-specific, not a global hero requirement.",
+      "motionOwnership": "campaign.ts owns opening and directional reveals; motion.ts owns control feedback and collection View Transitions. Interruptions settle to visible selected state; no autoplay, continuous loops or JavaScript-dependent initial visibility.",
+      "note": "No synthetic tonal ramps, pressed transforms, text inputs, or additional breakpoint promises are asserted. Component snippets bind to source CSS custom properties; primitives live exclusively in DESIGN.md frontmatter. This record captures source, not live verification or product/transaction claims."
+    }
+  },
+  "components": [
+    {
+      "name": "Primary button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Espresso rectangular action; hover and keyboard focus, plus native disabled appearance.",
+      "html": "<button class=\"ds-primary\">Discover the collection <svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M4 12h16m-6-6 6 6-6 6\"/></svg></button> <button class=\"ds-primary\" disabled>Unavailable</button>",
+      "css": ".ds-primary{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:50px;padding:14px 26px;border:1px solid var(--color-espresso);border-radius:var(--radius-control);background:var(--color-espresso);color:var(--color-paper);font:500 12px/1.7 var(--font-body);cursor:pointer;transition:background .25s,color .25s}.ds-primary:hover{background:var(--color-plum);border-color:var(--color-plum)}.ds-primary:focus-visible{outline:2px solid var(--color-plum);outline-offset:5px}.ds-primary:disabled{opacity:.5;cursor:not-allowed}@media(max-width:700px){.ds-primary{padding-inline:22px}}@media(prefers-reduced-motion:reduce){.ds-primary{transition:none!important}}"
+    },
+    {
+      "name": "Outline button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Quiet outlined action that inverts to espresso on hover.",
+      "html": "<button class=\"ds-outline\">Explore our philosophy</button>",
+      "css": ".ds-outline{display:inline-flex;align-items:center;justify-content:center;gap:24px;min-height:50px;padding:14px 26px;border:1px solid var(--color-espresso);border-radius:var(--radius-control);background:transparent;color:var(--color-espresso);font:500 12px/1.7 var(--font-body);cursor:pointer;transition:background .25s,color .25s}.ds-outline:hover{background:var(--color-espresso);color:var(--color-paper);border-color:var(--color-espresso)}.ds-outline:focus-visible{outline:2px solid var(--color-plum);outline-offset:5px}.ds-outline:disabled{opacity:.5;cursor:not-allowed}@media(max-width:700px){.ds-outline{padding-inline:22px}}@media(prefers-reduced-motion:reduce){.ds-outline{transition:none!important}}"
+    },
+    {
+      "name": "Navigation link",
+      "kind": "nav",
+      "refersTo": "navigation",
+      "description": "Desktop paper navigation fragment; no synthetic current-route state.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Preview navigation\"><a href=\"#products\">The collection</a><a href=\"#story\">Our philosophy</a></nav>",
+      "css": ".ds-nav{display:flex;align-items:center;gap:30px;min-height:88px;background:var(--color-paper);color:var(--color-espresso);font:400 11px/1.7 var(--font-body)}.ds-nav a{color:inherit;text-decoration:none;padding-block:14px;position:relative}.ds-nav a::after{content:'';height:1px;background:currentColor;position:absolute;bottom:10px;left:0;right:100%;transition:right .25s}.ds-nav a:hover::after{right:0}.ds-nav a:focus-visible{outline:2px solid var(--color-plum);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-nav a::after{transition:none!important}}"
+    },
+    {
+      "name": "Collection filters",
+      "kind": "chip",
+      "refersTo": "filter-selected",
+      "description": "Text tabs with a bottom selection indicator; not filled pill chips.",
+      "html": "<div class=\"ds-filters\" role=\"group\" aria-label=\"Collection filters\"><button aria-pressed=\"true\">All essentials</button><button aria-pressed=\"false\">Skin</button><button aria-pressed=\"false\">Lips</button></div>",
+      "css": ".ds-filters{display:flex;gap:30px;border-bottom:1px solid var(--color-line)}.ds-filters button{background:none;border:0;padding:15px 0;min-height:48px;position:relative;color:var(--color-muted);font:400 11px/1.7 var(--font-body);cursor:pointer}.ds-filters button[aria-pressed=true]{color:var(--color-espresso)}.ds-filters button[aria-pressed=true]::after{content:'';position:absolute;height:2px;bottom:-1px;left:0;right:0;background:var(--color-espresso)}.ds-filters button:focus-visible{outline:2px solid var(--color-plum);outline-offset:5px}"
+    },
+    {
+      "name": "Shade choice",
+      "kind": "chip",
+      "refersTo": "shade-selected",
+      "description": "Rectangular selected and unselected shade controls with functional circular swatches.",
+      "html": "<div class=\"ds-shades\" role=\"group\" aria-label=\"Shade\"><button aria-pressed=\"true\"><span class=\"ds-swatch ds-petal\"></span>Petal</button><button aria-pressed=\"false\"><span class=\"ds-swatch ds-rose\"></span>Rose</button></div>",
+      "css": ".ds-shades{display:flex;flex-wrap:wrap;gap:9px}.ds-shades button{border:1px solid var(--color-line);background:transparent;padding:9px 12px;display:flex;align-items:center;gap:8px;min-height:44px;color:var(--color-espresso);font:400 14px/1.7 var(--font-body);cursor:pointer}.ds-shades button[aria-pressed=true]{border-color:var(--color-espresso);background:var(--color-lavender)}.ds-swatch{width:24px;height:24px;border-radius:50%;border:1px solid color-mix(in srgb,var(--color-espresso) 20%,transparent)}.ds-petal{background:var(--shade-petal)}.ds-rose{background:var(--shade-rose)}.ds-shades button:focus-visible{outline:2px solid var(--color-plum);outline-offset:5px}"
+    },
+    {
+      "name": "Ritual radio options",
+      "kind": "input",
+      "refersTo": "ritual-option",
+      "description": "Native radio inputs; checked tiles gain lavender fill and espresso borders.",
+      "html": "<div class=\"ds-options\"><label><input type=\"radio\" name=\"ds-ritual\" checked> A natural glow</label><label><input type=\"radio\" name=\"ds-ritual\"> A little colour</label></div>",
+      "css": ".ds-options{display:grid;grid-template-columns:1fr 1fr;gap:10px;color:var(--color-espresso);font:400 14px/1.7 var(--font-body)}.ds-options label{display:flex;gap:10px;align-items:center;padding:18px;border:1px solid var(--color-line);cursor:pointer}.ds-options label:has(input:checked){background:var(--color-lavender);border-color:var(--color-espresso)}.ds-options input{accent-color:var(--color-plum)}.ds-options input:focus-visible{outline:2px solid var(--color-plum);outline-offset:5px}@media(max-width:700px){.ds-options{grid-template-columns:1fr}}"
+    },
+    {
+      "name": "Product photographic control",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "Square-cornered portrait frame, clipping image hover zoom and a square quick-add action. Inline abstract SVG is a preview placeholder, not product photography.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-photo\"><button class=\"ds-image\" aria-label=\"Discover Glow Drops Serum\"><svg class=\"ds-art\" viewBox=\"0 0 400 470\" role=\"img\" aria-label=\"Illustrative preview placeholder\"><rect width=\"400\" height=\"470\" fill=\"var(--color-lavender)\"/><path d=\"M0 330 180 180 400 350V470H0Z\" fill=\"var(--color-mauve)\"/></svg></button><span class=\"ds-category\">Skin</span><button class=\"ds-add\" aria-label=\"Choose and add Glow Drops Serum\"><svg width=\"18\" height=\"18\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\" aria-hidden=\"true\"><path d=\"M12 5v14M5 12h14\"/></svg></button></div><div class=\"ds-title\"><button>Glow Drops Serum</button><span>$28</span></div></article>",
+      "css": ".ds-card{width:280px;max-width:100%;color:var(--color-espresso);font-family:var(--font-body)}.ds-photo{position:relative;background:var(--color-lavender);overflow:hidden}.ds-image{display:block;padding:0;border:0;width:100%;background:none;cursor:pointer}.ds-art{display:block;width:100%;aspect-ratio:4/4.7;transition:transform .7s var(--ease-out)}.ds-image:hover .ds-art{transform:scale(1.045)}.ds-category{position:absolute;top:17px;left:17px;background:var(--color-paper);padding:4px 10px;font-size:9px;pointer-events:none}.ds-add{position:absolute;right:15px;bottom:15px;width:44px;height:44px;border:0;background:var(--color-paper);color:var(--color-espresso);display:grid;place-items:center;cursor:pointer}.ds-add:hover{background:var(--color-mauve)}.ds-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px}.ds-title button{padding:0;border:0;background:none;text-align:left;min-height:44px;color:inherit;font:500 13px/1.7 var(--font-body);cursor:pointer}.ds-title span{font-size:12px;font-variant-numeric:tabular-nums}.ds-card button:focus-visible{outline:2px solid var(--color-plum);outline-offset:5px}@media(prefers-reduced-motion:reduce){.ds-art{transition:none!important}}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Beauty Atelier",
+    "overview": "A quiet beauty editorial: botanical, personable, and premium without ornamental UI. Lavender and warm paper support expressive photography; espresso typography supplies structure. Contrast comes from a regular-weight fashion serif paired with an understated utility sans.\n\nPhotography remains illustrative, never evidence of real products or endorsements. This record replaces the former Mastercard system; historical specifications are not current visual authority. Source values come from `src/styles/global.css` and the built components.",
+    "keyCharacteristics": ["Lavender and paper surfaces with espresso structure.", "Regular and italic editorial serif, restrained sans-serif utilities.", "Square-cornered photography and minimally rounded controls.", "Flat sections, fine dividers, and functional state feedback."],
+    "rules": [
+      {"name": "The Functional Accent Rule", "body": "Use shade colors to represent shade choices, not as a substitute UI palette.", "section": "colors"},
+      {"name": "The Quiet Heading Rule", "body": "Preserve regular-weight serif headings; do not add decorative section eyebrows to the current hierarchy.", "section": "typography"},
+      {"name": "The Rectangular Frame Rule", "body": "Keep media square-cornered and controls restrained; do not restore pill navigation, stadium frames, circular portraits, or orbital decoration.", "section": "shapes"}
+    ],
+    "dos": ["**Do** use the current lavender, espresso, mauve, paper, and plum roles consistently.", "**Do** pair regular/italic Bodoni Moda headings with Manrope utility text.", "**Do** preserve keyboard focus, native selection, readable notices, and reduced-motion behavior.", "**Do** distinguish illustrative photography and interactive-demo behavior from real commercial claims."],
+    "donts": ["**Don't** restore Mastercard colors, pill navigation, stadium frames, circular portraits, or orbital decoration.", "**Don't** turn the campaign contact sheet, product association, opening choreography, or heading size into a global hero/layout mandate.", "**Don't** add heading eyebrows or decorative shadows to flat collection cards.", "**Don't** interpret functional circular swatches as permission for circular media framing."]
+  }
+}
