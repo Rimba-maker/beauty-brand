@@ -1,65 +1,108 @@
 ---
-import { BRAND, FOOTER } from '~/data/content';
+const links = [
+  { label: 'The collection', href: '#products' },
+  { label: 'Your ritual', href: '#ritual' },
+  { label: 'Ingredients', href: '#ingredients' },
+  { label: 'Our story', href: '#story' },
+  { label: 'The journal', href: '#journal' },
+];
 ---
 
-<footer class="bg-ink px-6 pb-32 pt-24 lg:px-12 text-white">
-  <div class="mx-auto max-w-[var(--container-content)]">
-    <h2 class="max-w-3xl type-h2" style="color: var(--color-canvas);">
-      We're always here when you need us.
-    </h2>
-
-    <div class="mt-20 grid gap-12 md:grid-cols-12">
-      <div class="md:col-span-4">
-        <p class="type-h3" style="color: var(--color-canvas);">{BRAND.name}</p>
-        <p class="mt-4 max-w-xs type-footer-link" style="color: var(--color-dust-taupe);">
-          {BRAND.subtagline}
-        </p>
-      </div>
-
-      <div class="grid gap-8 sm:grid-cols-2 md:col-span-8 md:grid-cols-4">
-        {FOOTER.columns.map((col) => (
-          <div>
-            <p class="type-footer-header" style="color: var(--color-dust-taupe);">
-              {col.heading}
-            </p>
-            <ul class="mt-5 space-y-3">
-              {col.links.map((link) => (
-                <li>
-                  <a
-                    href={link.href}
-                    class="type-footer-link"
-                    style="color: var(--color-canvas);"
-                  >
-                    {link.label} <span aria-hidden="true">↗</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+<footer class="footer">
+  <div class="section-shell footer-shell">
+    <div class="footer-top">
+      <p class="footer-invitation">Beauty, on<br /><em>your own terms.</em></p>
+      <nav aria-label="Footer navigation">
+        <ul>
+          {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        </ul>
+      </nav>
+      <div class="footer-context">
+        <p>A fictional beauty brand,<br />with roots in Jakarta.</p>
+        <p>Explore the collection, build a bag, and find your ritual. This interactive demo does not accept orders or payments.</p>
       </div>
     </div>
-
-    <div
-      class="mt-20 flex flex-wrap items-center justify-between gap-4 border-t pt-8"
-      style="border-color: rgba(255,255,255,0.2);"
-    >
-      <p class="type-footer-link" style="color: var(--color-dust-taupe);">
-        {FOOTER.tagline}
-      </p>
-      <div class="flex items-center gap-6">
-        <a href="#" class="type-footer-link" style="color: var(--color-dust-taupe);">Privacy</a>
-        <a href="#" class="type-footer-link" style="color: var(--color-dust-taupe);">Terms</a>
-        <span
-          class="inline-flex items-center gap-2 border px-4 py-2 type-footer-link"
-          style="border-radius: var(--radius-pill); border-color: rgba(255,255,255,0.4); color: var(--color-canvas);"
-        >
-          🌐 ID — Indonesia
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
-        </span>
-      </div>
+    <p class="footer-wordmark" aria-label="DEWY CO.">DEWY CO.</p>
+    <div class="footer-bottom">
+      <p>© 2026 DEWY CO. · A beauty atelier demo.</p>
+      <a href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Photography via Pexels <span class="sr-only">(opens in a new tab)</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M6 18 18 6M6 6h12v12" />
+        </svg>
+      </a>
+      <details class="privacy">
+        <summary>Privacy in this demo</summary>
+        <p>Your bag is saved locally in this browser so it can remain here when you return. No payment information or email addresses are collected or stored by this demo. Stock photography illustrates the fictional brand; it does not depict real DEWY products or customers.</p>
+      </details>
     </div>
   </div>
 </footer>
+
+<style>
+  .footer { color: var(--color-paper); background: var(--color-espresso); }
+  .footer-shell { padding-top: clamp(3.5rem, 6vw, 6rem); padding-bottom: 2rem; }
+  .footer-top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.6fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 6rem);
+    align-items: start;
+  }
+  .footer-invitation {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 3.8vw, 3.75rem);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+  nav ul { list-style: none; margin: 0; padding: 0; }
+  nav a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 0.875rem;
+    text-decoration: none;
+  }
+  .footer a { color: inherit; }
+  .footer a:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+  .footer-context { font-size: 0.8125rem; line-height: 1.85; }
+  .footer-context p { margin: 0; }
+  .footer-context p + p { margin-top: 1rem; }
+  .footer-wordmark {
+    margin: clamp(3rem, 7vw, 7rem) 0 2rem;
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 14.5vw, 12rem);
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    white-space: nowrap;
+    text-align: center;
+  }
+  .footer-bottom {
+    display: grid;
+    grid-template-columns: 1fr auto minmax(0, 1fr);
+    align-items: start;
+    gap: 1rem 2rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-paper) 30%, transparent);
+    font-size: 0.6875rem;
+    line-height: 1.7;
+  }
+  .footer-bottom > p { margin: 0; padding-block: 0.8rem; }
+  .footer-bottom > a { display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; text-decoration: none; }
+  .privacy { justify-self: end; max-width: 38ch; }
+  .privacy summary { min-height: 44px; padding-block: 0.8rem; cursor: pointer; }
+  .privacy summary:hover { text-decoration: underline; text-underline-offset: 0.3em; }
+  .privacy p { margin-block: 0.5rem 0; }
+  @media (max-width: 900px) {
+    .footer-top { grid-template-columns: 1fr 1fr; }
+    .footer-invitation { grid-column: 1 / -1; }
+    .footer-bottom { grid-template-columns: 1fr 1fr; }
+    .privacy { grid-column: 1 / -1; justify-self: start; max-width: 65ch; }
+  }
+  @media (max-width: 480px) {
+    .footer-top { gap: 1.75rem; }
+    .footer-context { font-size: 0.75rem; }
+    .footer-bottom { grid-template-columns: 1fr; gap: 0; }
+    .footer-wordmark { margin-bottom: 1.5rem; }
+  }
+</style>

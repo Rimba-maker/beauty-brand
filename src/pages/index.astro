@@ -5,36 +5,43 @@ import Hero from '~/components/Hero.astro';
 import ProductCarousel from '~/components/ProductCarousel.astro';
 import FeaturedProduct from '~/components/FeaturedProduct.astro';
 import BrandStory from '~/components/BrandStory.astro';
-import Testimonials from '~/components/Testimonials.astro';
 import IngredientSpotlight from '~/components/IngredientSpotlight.astro';
+import Journal from '~/components/Journal.astro';
 import EmailCapture from '~/components/EmailCapture.astro';
 import Footer from '~/components/Footer.astro';
+import Interactions from '~/components/Interactions.astro';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}/favicon.svg`} />
+    <link rel="icon" type="image/svg+xml" href={`${base}/favicon.svg`} />
+    <link rel="preload" href={`${base}/fonts/bodoni-400.ttf`} as="font" type="font/ttf" crossorigin />
+    <link rel="preload" href={`${base}/fonts/manrope-400.ttf`} as="font" type="font/ttf" crossorigin />
     <meta name="generator" content={Astro.generator} />
-    <title>DEWY CO. — Dewy skin, made fun.</title>
-    <meta
-      name="description"
-      content="Botanical-powered makeup that loves your skin back. Cruelty-free, vegan, made with intention."
-    />
+    <title>DEWY CO. — A little ritual. A natural glow.</title>
+    <meta name="description" content="Discover skin-first makeup, botanical ingredients and your own beauty ritual. Explore the DEWY CO. fictional beauty collection." />
+    <meta name="theme-color" content="#ede8f0" />
+    <meta property="og:title" content="DEWY CO. — Beauty, on your terms." />
+    <meta property="og:description" content="A little ritual. A natural glow. Discover our skin-first beauty collection." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={`${Astro.site}${base.slice(1)}/images/hero.jpg`} />
   </head>
   <body>
+    <a href="#main-content" class="skip-link">Skip to content</a>
     <TopNav />
-    <main>
+    <main id="main-content">
       <Hero />
       <ProductCarousel />
       <FeaturedProduct />
       <BrandStory />
-      <Testimonials />
       <IngredientSpotlight />
+      <Journal />
       <EmailCapture />
     </main>
     <Footer />
+    <Interactions />
   </body>
 </html>

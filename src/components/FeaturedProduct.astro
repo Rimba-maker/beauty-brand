@@ -1,57 +1,12 @@
 ---
-import { FEATURED_PRODUCT } from '~/data/content';
+import { image } from '~/data/content';
+import Icon from './Icon.astro';
 ---
-
-<section class="px-6 py-12">
-  <div class="mx-auto max-w-[var(--container-content)]">
-    <div
-      class="relative overflow-hidden bg-ink"
-      style="border-radius: var(--radius-stadium); box-shadow: var(--shadow-card);"
-    >
-      <div class="grid lg:grid-cols-2">
-        <div class="relative">
-          <img
-            src={FEATURED_PRODUCT.imageUrl}
-            alt={FEATURED_PRODUCT.name}
-            width="900"
-            height="900"
-            loading="lazy"
-            class="aspect-square w-full object-cover lg:aspect-auto lg:h-full"
-          />
-        </div>
-
-        <div class="bg-ink p-6 text-canvas sm:p-8 lg:p-12 xl:p-16">
-          <p class="eyebrow-dot type-eyebrow" style="color: var(--color-canvas);">
-            Hero This Season
-          </p>
-          <h2 class="mt-6 type-h2" style="color: var(--color-canvas);">
-            {FEATURED_PRODUCT.name}
-          </h2>
-          <p class="mt-6 type-body opacity-90">{FEATURED_PRODUCT.longDescription}</p>
-
-          <ul class="mt-8 flex flex-wrap gap-2">
-            {FEATURED_PRODUCT.ingredients.map((ing) => (
-              <li
-                class="inline-flex bg-white px-4 py-2 type-eyebrow text-ink"
-                style="border-radius: var(--radius-pill);"
-              >
-                {ing}
-              </li>
-            ))}
-          </ul>
-
-          <div class="mt-8 flex flex-wrap items-center gap-4 lg:mt-12 lg:gap-6">
-            <span class="type-h2" style="color: var(--color-canvas);">
-              {FEATURED_PRODUCT.price}
-            </span>
-            <button
-              class="rounded-button border-2 border-canvas bg-canvas px-6 py-3 type-button text-ink"
-            >
-              Add to bag
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<section class="ritual" id="ritual">
+  <div class="ritual-photo"><img src={image('ritual')} alt="A woman taking a quiet moment for her skincare ritual" width="1000" height="1200" loading="lazy" /></div>
+  <div class="ritual-copy"><h2>Not a routine.<br /><em>Your ritual.</em></h2><p>Some days, a little glow is all you need.<br />Others call for a flush of colour.<br />There’s no one way to be you.</p><p>Tell us what you’re in the mood for.<br />We’ll help you find your kind of beauty.</p><button class="button" data-open-quiz>Find my ritual<Icon name="arrow" /></button><span class="ritual-note">Two little questions. A ritual that’s yours.</span></div>
 </section>
+<style>
+  .ritual{display:grid;grid-template-columns:1fr 1fr;background:var(--color-mauve)}.ritual-photo{min-height:580px;overflow:hidden}.ritual-photo img{width:100%;height:100%;max-height:650px;object-fit:cover;object-position:center 40%}.ritual-copy{padding:70px 7vw;display:flex;flex-direction:column;justify-content:center;align-items:start}.ritual-copy h2{font-family:var(--font-display);font-size:clamp(44px,5vw,70px);line-height:1.1;letter-spacing:-.025em;margin-bottom:28px}.ritual-copy h2 em{font-style:italic}.ritual-copy p{font-size:12px;margin-bottom:18px;line-height:1.9}.ritual-copy .button{margin-top:12px}.ritual-note{font-size:9px;margin-top:16px;color:var(--color-espresso)}
+  @media(max-width:700px){.ritual{grid-template-columns:1fr}.ritual-photo{min-height:0;height:390px}.ritual-photo img{object-position:center 35%}.ritual-copy{padding:45px 6vw 50px}.ritual-copy h2{font-size:49px}.ritual-copy p{font-size:12px}}
+</style>

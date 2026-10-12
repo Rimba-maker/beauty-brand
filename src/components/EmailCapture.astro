@@ -1,33 +1,79 @@
----
-import { EMAIL_CAPTURE } from '~/data/content';
----
-
-<section class="px-6 py-12">
-  <div class="mx-auto max-w-[var(--container-content)]">
-    <div
-      class="bg-lifted px-8 py-20 lg:px-20"
-      style="border-radius: var(--radius-stadium);"
-    >
-      <div class="max-w-2xl">
-        <p class="eyebrow-dot type-eyebrow text-ink">{EMAIL_CAPTURE.eyebrow}</p>
-        <h2 class="mt-4 type-h2 text-ink">{EMAIL_CAPTURE.headline}</h2>
-        <p class="mt-6 type-body text-slate">{EMAIL_CAPTURE.body}</p>
-
-        <form class="mt-10 flex flex-col gap-3 sm:flex-row" onsubmit="return false;">
-          <input
-            type="email"
-            placeholder={EMAIL_CAPTURE.placeholder}
-            class="flex-1 border-2 border-ink/20 bg-white px-6 py-3 type-body text-ink"
-            style="border-radius: var(--radius-pill);"
-          />
-          <button
-            type="submit"
-            class="rounded-button border-2 border-ink bg-ink px-8 py-3 type-button text-canvas"
-          >
-            {EMAIL_CAPTURE.cta}
-          </button>
-        </form>
-      </div>
+<section class="newsletter" aria-labelledby="newsletter-heading">
+  <div class="newsletter-layout section-shell">
+    <div class="newsletter-copy">
+      <h2 id="newsletter-heading" class="section-heading">A little beauty,<br /><em>in your inbox.</em></h2>
+      <p class="newsletter-intro">A quieter corner for thoughtful routines, ingredient notes, and the things we keep coming back to.</p>
+      <p class="newsletter-disclosure">Newsletter preview — subscriptions are not connected.</p>
+    </div>
+    <div class="newsletter-actions">
+      <details>
+        <summary>
+          Take a peek inside
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M5 12h14" />
+            <path class="plus-vertical" d="M12 5v14" />
+          </svg>
+        </summary>
+        <div class="newsletter-preview">
+          <p>A future edition would bring you:</p>
+          <ul>
+            <li>Simple ways to layer your everyday essentials.</li>
+            <li>A closer look at ingredients in the collection.</li>
+            <li>Fresh notes and inspiration from the atelier.</li>
+          </ul>
+          <p>No email address is collected in this demo.</p>
+        </div>
+      </details>
+      <p class="finder-intro">For something personal, right now.</p>
+      <button type="button" class="button button-outline" data-open-quiz>
+        Find your ritual
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <path d="M4 12h15M13 6l6 6-6 6" />
+        </svg>
+      </button>
     </div>
   </div>
 </section>
+
+<style>
+  .newsletter { background: var(--color-mauve); }
+  .newsletter-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.75fr);
+    align-items: center;
+    gap: clamp(2.5rem, 8vw, 9rem);
+    padding-block: clamp(4rem, 7vw, 7rem);
+  }
+  .newsletter h2 { margin: 0; }
+  .newsletter h2 em { font-weight: inherit; }
+  .newsletter-intro { max-width: 43ch; margin: 1.75rem 0 0; font-size: 0.9375rem; line-height: 1.8; }
+  .newsletter-disclosure { margin-top: 1.25rem; font-size: 0.75rem; line-height: 1.7; }
+  details { border-block: 1px solid color-mix(in srgb, var(--color-espresso) 40%, transparent); }
+  summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    min-height: 64px;
+    padding-block: 1rem;
+    cursor: pointer;
+    list-style: none;
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+  summary svg { flex-shrink: 0; }
+  details[open] .plus-vertical { display: none; }
+  .newsletter-preview { padding-block: 0 1.25rem; font-size: 0.875rem; line-height: 1.8; }
+  .newsletter-preview p { margin: 0; }
+  .newsletter-preview ul { margin-block: 0.75rem 1rem; padding-left: 1.25rem; }
+  .newsletter-preview li + li { margin-top: 0.35rem; }
+  .finder-intro { margin: 2rem 0 1rem; font-size: 0.8125rem; line-height: 1.6; }
+  .newsletter-actions .button { gap: 1rem; }
+  @media (max-width: 760px) {
+    .newsletter-layout { grid-template-columns: 1fr; }
+    .newsletter-intro { max-width: 48ch; }
+    .newsletter-actions .button { width: 100%; justify-content: space-between; }
+  }
+</style>

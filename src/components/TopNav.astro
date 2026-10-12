@@ -1,68 +1,30 @@
 ---
 import { BRAND } from '~/data/content';
+import Icon from './Icon.astro';
 ---
-
-<header class="pointer-events-none fixed inset-x-0 top-5 z-50 px-5">
-  <nav
-    class="pointer-events-auto mx-auto flex max-w-[var(--container-tight)] items-center justify-between bg-white px-6 py-3 lg:px-8"
-    style="border-radius: var(--radius-pill); box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.06), 0px 0px 0px 1px rgba(0,0,0,0.04);"
-  >
-    <!-- Wordmark -->
-    <a
-      href="#"
-      class="text-ink"
-      style="font-family: var(--font-sans); font-size: 15px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;"
-    >
-      {BRAND.name}
-    </a>
-
-    <!-- Nav links — desktop -->
-    <ul class="hidden items-center gap-8 lg:flex">
-      {BRAND.navLinks.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class="text-ink transition-opacity hover:opacity-50"
-            style="font-family: var(--font-sans); font-size: 14px; font-weight: 500; letter-spacing: -0.01em;"
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-
-    <!-- Right actions -->
-    <div class="flex items-center gap-2">
-      <!-- Search icon — desktop only -->
-      <button
-        aria-label="Search"
-        class="hidden h-9 w-9 items-center justify-center text-ink opacity-60 transition-opacity hover:opacity-100 lg:inline-flex"
-      >
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
-          <circle cx="11" cy="11" r="7" />
-          <line x1="21" y1="21" x2="16.65" y2="16.65" />
-        </svg>
-      </button>
-
-      <!-- Shop CTA — desktop -->
-      <a
-        href="#products"
-        class="hidden bg-ink text-canvas lg:inline-flex items-center"
-        style="border-radius: var(--radius-button); padding: 9px 20px; font-family: var(--font-sans); font-size: 13px; font-weight: 600; letter-spacing: 0.01em;"
-      >
-        Shop Now
-      </a>
-
-      <!-- Hamburger — mobile only -->
-      <button class="h-9 w-9 items-center justify-center text-ink lg:hidden inline-flex" aria-label="Open menu">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <line x1="4" y1="7" x2="20" y2="7" />
-          <line x1="4" y1="13" x2="20" y2="13" />
-          <line x1="4" y1="19" x2="20" y2="19" />
-        </svg>
-      </button>
-    </div>
+<div class="announcement">Skin-first. Botanical-powered. Beautifully you. <a href="#ingredients">Meet our ingredients <Icon name="arrow" /></a></div>
+<header class="site-header">
+  <nav aria-label="Main navigation">
+    <button class="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"><Icon name="menu" /></button>
+    <div class="desktop-links"><a href="#products">The collection</a><a href="#story">Our philosophy</a></div>
+    <a href="#home" class="wordmark" aria-label="DEWY CO. home">dewy co<span>.</span></a>
+    <div class="nav-right"><a class="journal-link" href="#journal">The journal</a><button class="bag-toggle" data-open-bag aria-label="Open shopping bag"><Icon name="bag" /><span>Bag (<span data-bag-count>0</span>)</span></button></div>
   </nav>
+  <div id="mobile-menu" hidden>
+    {BRAND.navLinks.map(link => <a href={link.href}>{link.label}<Icon name="arrow" /></a>)}
+    <button data-open-quiz>Find your ritual<Icon name="arrow" /></button>
+  </div>
 </header>
-
-<div class="h-24" aria-hidden="true"></div>
+<style>
+  .announcement{height:34px;background:var(--color-espresso);color:var(--color-paper);display:flex;justify-content:center;align-items:center;gap:26px;font-size:10px;letter-spacing:.025em}
+  .announcement a{display:flex;gap:8px;align-items:center}.announcement :global(svg){width:13px;height:13px}
+  .site-header{position:sticky;top:0;z-index:40;background:var(--color-paper)}
+  nav{height:88px;max-width:1560px;padding-inline:5vw;margin:auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+  .desktop-links,.nav-right{display:flex;align-items:center;gap:30px;font-size:11px}.nav-right{justify-content:flex-end}
+  .desktop-links a,.journal-link{padding-block:14px;position:relative}.desktop-links a::after,.journal-link::after{content:'';height:1px;background:currentColor;position:absolute;bottom:10px;left:0;right:100%;transition:right .25s}.desktop-links a:hover::after,.journal-link:hover::after{right:0}
+  .wordmark{font-family:var(--font-display);font-size:46px;line-height:1;letter-spacing:-.04em}.wordmark span{color:var(--color-plum)}
+  .bag-toggle,.menu-toggle{border:0;background:none;min-height:44px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:11px;padding:0 4px}.menu-toggle{display:none}
+  #mobile-menu{border-top:1px solid var(--color-line);padding:15px 6vw 25px;background:var(--color-paper)}
+  #mobile-menu a,#mobile-menu button{display:flex;justify-content:space-between;padding:15px 0;width:100%;border:0;border-bottom:1px solid var(--color-line);background:transparent;font-size:14px;text-align:left}
+  @media(max-width:800px){nav{height:72px;padding-inline:6vw}.wordmark{font-size:37px}.desktop-links,.journal-link{display:none}.menu-toggle{display:flex;justify-self:start;width:44px}.announcement{font-size:9px;height:30px}.announcement a{display:none}.nav-right{gap:0}.bag-toggle{font-size:10px;gap:6px}}
+</style>

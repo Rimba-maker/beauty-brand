@@ -1,28 +1,72 @@
 ---
-import { BRAND_STORY } from '~/data/content';
+import { BRAND_STORY, image } from '~/data/content';
 ---
 
-<section id="story" class="relative px-6 py-24 lg:py-32">
-  <div class="relative mx-auto max-w-[var(--container-content)]">
-
-    <!-- Ghost watermark: inside container, centered, two lines -->
-    <span
-      class="pointer-events-none absolute inset-0 flex select-none items-center justify-center text-center leading-none type-ghost"
-      style="font-size: clamp(60px, 7.5vw, 120px); padding-inline: 24px;"
-      aria-hidden="true"
-    >
-      Makeup should<br />love your skin back.
-    </span>
-
-    <div class="relative max-w-3xl">
-      <p class="eyebrow-dot type-eyebrow text-ink">{BRAND_STORY.eyebrow}</p>
-      <h2 class="mt-6 type-h2 text-ink">{BRAND_STORY.headline}</h2>
-
-      <div class="mt-10 space-y-6">
-        {BRAND_STORY.paragraphs.map((para) => (
-          <p class="type-body text-ink">{para}</p>
-        ))}
-      </div>
+<section id="story" class="story section-shell" aria-labelledby="story-heading">
+  <figure class="story-portrait">
+    <img
+      src={image('story')}
+      alt="An editorial beauty portrait, illustrating the skin-first spirit of DEWY CO."
+      width="1000"
+      height="1250"
+      loading="lazy"
+      decoding="async"
+    />
+    <figcaption>A little intention. An everyday ritual.</figcaption>
+  </figure>
+  <div class="story-copy">
+    <h2 id="story-heading" class="section-heading">{BRAND_STORY.headline}</h2>
+    <div class="story-paragraphs">
+      {BRAND_STORY.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
     </div>
+    <a class="text-link" href="#products">
+      Meet your everyday essentials
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M4 12h15M13 6l6 6-6 6" />
+      </svg>
+    </a>
   </div>
 </section>
+
+<style>
+  .story {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(3rem, 9vw, 10rem);
+    padding-block: clamp(5rem, 11vw, 10rem);
+  }
+  .story-portrait { margin: 0; }
+  .story-portrait img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: var(--color-mauve);
+  }
+  figcaption {
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+  }
+  .story-copy { padding-block: 2rem; }
+  .story-copy h2 { max-width: 12ch; }
+  .story-paragraphs {
+    margin-block: 2.25rem 2rem;
+    max-width: 43ch;
+    font-size: 0.9375rem;
+    line-height: 1.9;
+  }
+  .story-paragraphs p { margin: 0; }
+  .story-paragraphs p + p { margin-top: 1.4rem; }
+  .story-copy .text-link { gap: 0.8rem; }
+  @media (max-width: 760px) {
+    .story { grid-template-columns: 1fr; gap: 2.5rem; }
+    .story-portrait { width: 88%; }
+    .story-copy { padding-block: 0; }
+    .story-copy h2 { max-width: 15ch; }
+    .story-paragraphs { max-width: 52ch; margin-top: 1.5rem; }
+  }
+</style>

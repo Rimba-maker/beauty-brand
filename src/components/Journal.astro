@@ -1,0 +1,79 @@
+---
+import { JOURNAL, image } from '~/data/content';
+---
+
+<section id="journal" class="journal section-shell" aria-labelledby="journal-heading">
+  <div class="journal-heading">
+    <h2 id="journal-heading" class="section-heading">Notes from<br /><em>the atelier.</em></h2>
+    <p>Small observations. Everyday inspiration.<br />A more considered approach to your beauty ritual.</p>
+  </div>
+  <div class="journal-grid">
+    {JOURNAL.map((entry) => (
+      <article class="journal-article">
+        <img
+          src={image(entry.image)}
+          alt={`Illustrative editorial photography for “${entry.title}”`}
+          width="800"
+          height="1000"
+          loading="lazy"
+          decoding="async"
+        />
+        <h3>{entry.title}</h3>
+        <p>{entry.description}</p>
+        <button type="button" class="text-link" data-product={entry.productId}>
+          Explore the essential
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M4 12h15M13 6l6 6-6 6" />
+          </svg>
+        </button>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .journal { padding-block: clamp(5rem, 10vw, 9rem); }
+  .journal-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2.5rem;
+    margin-bottom: 3rem;
+  }
+  .journal-heading h2 { margin: 0; }
+  .journal-heading h2 em { font-weight: inherit; }
+  .journal-heading > p {
+    max-width: 35ch;
+    margin: 0 0 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.8;
+  }
+  .journal-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+  .journal-article { display: flex; flex-direction: column; align-items: flex-start; min-width: 0; }
+  .journal-article img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: var(--color-mauve);
+  }
+  .journal-article h3 {
+    margin: 1.5rem 0 0.75rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 2.25vw, 2.25rem);
+    line-height: 1.2;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+  .journal-article p { margin: 0 0 1.25rem; max-width: 39ch; font-size: 0.875rem; line-height: 1.8; }
+  .journal-article .text-link { margin-top: auto; gap: 0.75rem; text-align: left; }
+  @media (max-width: 760px) {
+    .journal-heading { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
+    .journal-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .journal-article img { aspect-ratio: 1; }
+    .journal-article h3 { font-size: 2rem; }
+    .journal-article p { max-width: 48ch; }
+  }
+</style>

@@ -1,57 +1,24 @@
 ---
-import { PRODUCTS } from '~/data/content';
+import { PRODUCTS, image, money } from '~/data/content';
+import Icon from './Icon.astro';
 ---
-
-<section id="products" class="relative overflow-hidden px-6 py-24">
-  <div class="mx-auto max-w-[var(--container-content)]">
-    <p class="eyebrow-dot type-eyebrow text-ink">The Collection</p>
-    <h2 class="mt-4 max-w-2xl type-h2 text-ink">
-      Six hero products. Zero filler.
-    </h2>
-    <p class="mt-4 max-w-xl type-body text-slate">
-      Every formula earns its place — built around skin-first actives at concentrations that actually do something.
-    </p>
+<section id="products" class="section-shell collection">
+  <div class="collection-heading"><h2 class="section-heading">Good for your skin.<br /><em>Even better for you.</em></h2><div><p>Thoughtful essentials. Beautiful little rituals.<br />Find the ones that feel like you.</p><button class="text-link" data-open-quiz>Not sure? Find your ritual<Icon name="arrow" /></button></div></div>
+  <div class="collection-toolbar"><div class="filters" role="group" aria-label="Filter collection">{['All essentials','Skin','Lips','Face','Brows'].map((category,i) => <button data-filter={i===0?'All':category} aria-pressed={i===0?'true':'false'}>{category}</button>)}</div><span data-product-count aria-live="polite">6 essentials</span></div>
+  <div class="product-grid">
+    {PRODUCTS.map(product => <article class="product-card" data-category={product.category}>
+      <div class="product-photo"><button class="image-button" data-product={product.id} aria-label={`Discover ${product.name}`}><img src={image(product.image)} alt={`Illustrative ${product.category.toLowerCase()} photography for ${product.name}`} width="700" height="900" loading="lazy" /></button><span class="product-category">{product.category}</span><button class="quick-add" data-product={product.id} aria-label={`Choose and add ${product.name}`}><Icon name="plus" /></button></div>
+      <div class="product-title"><h3><button data-product={product.id}>{product.name}</button></h3><span>{money(product.price)}</span></div><p>{product.tagline}</p>
+      <div class="product-foot"><span>{product.detail}</span><div class="product-swatches" aria-label={product.shades.length?`${product.shades.length} shades`:'No shade selection required'}>{product.shades.map(shade => <span class={`swatch shade-${shade.color}`} title={shade.name}></span>)}</div></div>
+    </article>)}
   </div>
-
-  <div class="mt-12 -mx-6 overflow-x-auto pl-6 pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-    <ul class="flex gap-8 pr-12 snap-x snap-mandatory">
-      {PRODUCTS.map((product) => (
-        <li class="relative w-[320px] shrink-0 snap-start lg:w-[380px]">
-          <div
-            class="relative overflow-hidden bg-ink"
-            style="border-radius: var(--radius-pill); aspect-ratio: 4/5;"
-          >
-            <img
-              src={product.imageUrl}
-              alt={product.name}
-              width="380"
-              height="475"
-              loading="lazy"
-              class="h-full w-full object-cover"
-            />
-            <span
-              class="absolute left-6 top-6 inline-flex items-center bg-white px-4 py-2 type-eyebrow text-ink"
-              style="border-radius: var(--radius-pill);"
-            >
-              · STORY
-            </span>
-            <button
-              class="absolute bottom-6 right-6 inline-flex items-center bg-ink px-6 py-3 type-button text-canvas"
-              style="border-radius: var(--radius-stadium);"
-            >
-              {product.price}
-            </button>
-          </div>
-
-          <div class="mt-6 flex items-start justify-between gap-4">
-            <div class="flex-1">
-              <p class="eyebrow-dot type-eyebrow text-ink">Product</p>
-              <h3 class="mt-3 type-h3 text-ink">{product.name}</h3>
-              <p class="mt-2 type-body text-slate">{product.tagline}</p>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ul>
-  </div>
+  <p class="notice collection-note">A fictional beauty collection. Product photography is illustrative; packaging shown is not DEWY CO. packaging. Prices in USD.</p>
 </section>
+<style>
+  .collection{padding-top:86px}.collection-heading{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;margin-bottom:40px}.collection-heading h2 em{font-style:italic}.collection-heading>div{max-width:350px}.collection-heading p{font-size:12px;color:var(--color-muted);margin-bottom:14px}.collection-heading button{background:none;border-top:0;border-inline:0;padding-inline:0}
+  .collection-toolbar{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:28px;border-bottom:1px solid var(--color-line)}.filters{display:flex;gap:30px}.filters button{background:none;border:0;padding:15px 0;font-size:11px;min-height:48px;position:relative;color:var(--color-muted)}.filters button[aria-pressed=true]{color:var(--color-espresso)}.filters button[aria-pressed=true]::after{content:'';position:absolute;height:2px;bottom:-1px;left:0;right:0;background:var(--color-espresso)}.collection-toolbar>span{font-size:10px;color:var(--color-muted)}
+  .product-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:38px 26px}.product-photo{position:relative;background:var(--color-lavender);overflow:hidden}.image-button{display:block;padding:0;border:0;width:100%;background:none}.product-photo img{width:100%;aspect-ratio:4/4.7;object-fit:cover;transition:transform .7s var(--ease-out)}.image-button:hover img{transform:scale(1.045)}.product-category{position:absolute;top:17px;left:17px;pointer-events:none;background:var(--color-paper);padding:4px 10px;font-size:9px}.quick-add{position:absolute;right:15px;bottom:15px;width:44px;height:44px;border:0;background:var(--color-paper);display:grid;place-items:center}.quick-add:hover{background:var(--color-mauve)}
+  .product-title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px}.product-title h3{font-size:13px;font-weight:500}.product-title button{padding:0;border:0;background:none;text-align:left;min-height:44px}.product-title>span{font-size:12px;font-variant-numeric:tabular-nums}.product-card>p{color:var(--color-muted);font-size:11px;margin-top:1px}.product-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px}.product-foot>span{font-size:9px;color:var(--color-muted)}.product-swatches{display:flex;gap:5px}.product-swatches .swatch{width:13px;height:13px}.collection-note{margin-top:28px;font-size:10px}
+  @media(max-width:800px){.collection-heading{align-items:start}.collection-heading>div{max-width:230px}.product-grid{gap:32px 18px}.product-foot{align-items:start;flex-direction:column}.filters{gap:20px}}
+  @media(max-width:600px){.collection{padding-top:60px}.collection-heading{flex-direction:column;gap:22px;margin-bottom:26px}.collection-heading>div{max-width:100%}.collection-heading h2{font-size:39px}.collection-toolbar{gap:10px}.filters{gap:19px;overflow:auto}.filters button{white-space:nowrap;font-size:10px}.collection-toolbar>span{display:none}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px 14px}.product-photo img{aspect-ratio:3/4}.product-category{top:10px;left:10px;font-size:8px;padding:3px 7px}.quick-add{bottom:9px;right:9px}.product-title{align-items:start;gap:6px;margin-top:12px}.product-title h3{font-size:11px;line-height:1.6}.product-title>span{font-size:10px;padding-top:6px}.product-card>p{font-size:10px}.product-foot{margin-top:9px;gap:9px}.product-foot>span{font-size:8px}.product-swatches{gap:4px}.product-swatches .swatch{width:11px;height:11px}}
+</style>

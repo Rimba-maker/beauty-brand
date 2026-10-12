@@ -1,43 +1,60 @@
 ---
-import { BRAND } from '~/data/content';
+import { CAMPAIGNS, PRODUCTS, image, money } from '~/data/content';
+import Icon from './Icon.astro';
+const firstProduct = PRODUCTS.find(product => product.id === CAMPAIGNS[0]!.productId)!;
 ---
-
-<section class="relative px-6 py-12 lg:py-16">
-  <div class="mx-auto max-w-[var(--container-content)]">
-    <p class="eyebrow-dot type-eyebrow text-ink">A New Beauty Ritual</p>
-
-    <h1 class="mt-6 type-h1 text-ink max-w-4xl">
-      {BRAND.tagline}
-    </h1>
-
-    <p class="mt-8 max-w-xl type-body text-ink">
-      {BRAND.subtagline}
-    </p>
-
-    <div class="mt-10 flex flex-wrap gap-3">
-      <button
-        class="rounded-button border-2 border-ink bg-ink px-6 py-3 type-button text-canvas"
-        style="min-height: 44px;"
-      >
-        {BRAND.ctaPrimary}
-      </button>
-      <button
-        class="rounded-button border-2 border-ink bg-white px-6 py-3 type-button text-ink"
-        style="min-height: 44px;"
-      >
-        {BRAND.ctaSecondary}
-      </button>
+<section class="campaign" id="home" aria-label="DEWY CO. beauty campaign">
+  <div class="campaign-copy">
+    <h1><span class="headline-line"><span data-headline-line>A little ritual.</span></span><span class="headline-line"><span data-headline-line>A natural <em>glow.</em></span></span></h1>
+    <p>Make room for yourself.<br />Skin-first makeup, rooted in botanicals.<br />Made to bring out what’s already yours.</p>
+    <div class="campaign-actions"><a href="#products" class="button">Discover the collection<Icon name="arrow" /></a><button type="button" data-open-quiz class="text-link">Find your ritual<Icon name="arrow" /></button></div>
+    <div class="campaign-contact-sheet" role="group" aria-label="Choose a campaign edit">
+      {CAMPAIGNS.map((campaign, index) => <button type="button" class="campaign-select" data-campaign={index} aria-controls="campaign-photographs" aria-label={`Show ${campaign.label.toLowerCase()} campaign`} aria-pressed={index === 0 ? 'true' : 'false'}>
+        <span class="campaign-thumbnail"><img src={image(campaign.image)} alt="" width="90" height="108" loading="eager" /></span>
+        <span class="campaign-edit-label"><span class="campaign-edit-number" aria-hidden="true">0{index + 1}</span><span>{campaign.label}</span></span>
+      </button>)}
     </div>
-
-    <div class="mt-16 overflow-hidden bg-ink" style="border-radius: var(--radius-stadium);">
-      <img
-        src={BRAND.heroImageUrl}
-        alt="DEWY CO. ritual"
-        width="1600"
-        height="900"
-        loading="eager"
-        class="h-[50vh] w-full object-cover lg:h-[65vh]"
-      />
-    </div>
+    <div class="campaign-caption"><span>Beauty, on your terms.</span><span>Jakarta roots. Everyday rituals.</span></div>
   </div>
+  <div class="campaign-stage">
+    <div class="campaign-media" id="campaign-photographs" data-active="0">
+      {CAMPAIGNS.map((campaign, index) => <img data-campaign-image={index} src={image(campaign.image)} alt={campaign.alt} width={index === 0 ? 1600 : 900} height={index === 0 ? 2397 : 1350} fetchpriority={index === 0 ? 'high' : 'auto'} loading="eager" aria-hidden={index === 0 ? 'false' : 'true'} />)}
+    </div>
+    <div class="campaign-photo-caption"><span data-campaign-label>Natural glow</span><span><span data-campaign-position>01</span> / 03</span></div>
+    <button type="button" class="campaign-product" data-product={firstProduct.id} aria-label={`Discover ${firstProduct.name}, ${money(firstProduct.price)}`}>
+      <img data-campaign-product-image src={image(firstProduct.image)} alt={`Illustrative photography for ${firstProduct.name}`} width="90" height="108" />
+      <span class="campaign-product-copy"><small data-campaign-product-copy>Your first step to dew</small><strong data-campaign-product-name>{firstProduct.name}</strong><span data-campaign-product-price>{money(firstProduct.price)} · Discover & add</span></span><Icon name="arrow" />
+    </button>
+    <p class="campaign-status" data-campaign-status role="status" aria-live="polite" aria-atomic="true"></p>
+  </div>
+  <div class="campaign-bottom"><span>Thoughtfully formulated. Effortlessly yours.</span><span>Campaign photography is illustrative.</span><a href="#products" aria-label="Explore collection below"><Icon name="arrow" /></a></div>
 </section>
+<div class="brand-promise"><span>Botanical-powered beauty</span><span>Skin-first, always</span><span>Vegan & cruelty-free</span><span>Made with intention</span></div>
+<style>
+  .campaign{background:var(--color-lavender);display:grid;grid-template-columns:1.05fr 1fr;position:relative}
+  .campaign-copy{padding:54px 3vw 30px 5vw;display:flex;flex-direction:column;justify-content:center;min-width:0;min-height:620px}
+  h1{font-family:var(--font-display);font-size:clamp(52px,6vw,88px);line-height:1.08;letter-spacing:-.035em;margin-bottom:26px}
+  .headline-line{display:block;overflow:hidden;padding-bottom:.12em;margin-bottom:-.12em}.headline-line>[data-headline-line]{display:block;white-space:nowrap}h1 em{font-style:italic;font-weight:400}
+  .campaign-copy>p{font-size:13px;line-height:1.9;color:var(--color-muted);max-width:42ch}
+  .campaign-actions{display:flex;align-items:center;gap:24px;margin-top:28px;flex-wrap:wrap}.campaign-actions .text-link{border-top:0;border-inline:0;background:none;padding:0;font-size:11px}
+  .campaign-contact-sheet{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:38px;max-width:580px}
+  .campaign-select{display:grid;grid-template-columns:60px 1fr;align-items:center;gap:12px;padding:0 0 10px;text-align:left;background:none;border:0;border-bottom:1px solid var(--color-line);min-width:0;min-height:44px;color:var(--color-muted)}
+  .campaign-thumbnail{display:block;overflow:hidden;background:var(--color-mauve)}.campaign-thumbnail img{width:60px;height:76px;object-fit:cover;object-position:center 40%}
+  .campaign-edit-label{display:grid;gap:8px;font-size:11px;line-height:1.45}.campaign-edit-number{font-size:10px;font-variant-numeric:tabular-nums}
+  .campaign-select[aria-pressed="true"]{border-bottom-color:var(--color-espresso);color:var(--color-espresso)}.campaign-select[aria-pressed="true"] .campaign-edit-number::after{content:'';display:inline-block;width:16px;height:1px;background:currentColor;margin-left:8px;vertical-align:middle}.campaign-select:hover{color:var(--color-plum);border-bottom-color:var(--color-plum)}
+  .campaign-caption{display:flex;gap:24px;font-size:10px;color:var(--color-muted);margin-top:auto;padding-top:30px}
+  .campaign-stage{display:flex;flex-direction:column;min-width:0;padding:28px 5vw 28px 0;position:relative}
+  .campaign-media{position:relative;overflow:hidden;flex:1;min-height:380px;background:var(--color-mauve)}
+  .campaign-media>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;visibility:hidden}
+  .campaign-media[data-active="0"]>[data-campaign-image="0"],.campaign-media[data-active="1"]>[data-campaign-image="1"],.campaign-media[data-active="2"]>[data-campaign-image="2"]{visibility:visible}
+  .campaign-media>img[data-revealing]{visibility:visible;z-index:1}
+  .campaign-photo-caption{display:flex;justify-content:space-between;gap:20px;padding:11px 0;font-size:10px;color:var(--color-muted);font-variant-numeric:tabular-nums}
+  .campaign-product{width:100%;background:var(--color-paper);border:1px solid var(--color-line);display:flex;align-items:center;gap:18px;padding:12px;text-align:left;transition:background .2s}
+  .campaign-product:hover{background:var(--color-mauve)}.campaign-product>img{width:62px;height:76px;object-fit:cover}.campaign-product-copy{display:grid;gap:3px;flex:1;min-width:0}.campaign-product small{font-size:10px;color:var(--color-muted)}.campaign-product strong{font-size:13px;font-weight:500}.campaign-product-copy>span{font-size:11px;font-variant-numeric:tabular-nums}.campaign-product :global(svg){margin-right:10px}
+  .campaign-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+  .campaign-bottom{grid-column:1/-1;display:flex;justify-content:space-between;gap:24px;align-items:center;min-height:58px;padding:0 5vw;font-size:10px;color:var(--color-muted);border-top:1px solid var(--color-line)}.campaign-bottom>a{min-width:44px;min-height:44px;display:grid;place-items:center;color:var(--color-espresso)}.campaign-bottom>a :global(svg){transform:rotate(90deg)}
+  .brand-promise{display:flex;justify-content:space-around;gap:20px;padding:25px 5vw;border-bottom:1px solid var(--color-line);font-size:10px;text-transform:uppercase;letter-spacing:.09em}
+  @media(min-width:1600px){.campaign-copy{padding-left:max(5vw,calc((100vw - 1400px)/2))}}
+  @media(max-width:1100px){.campaign-copy{padding-top:40px;min-height:580px}h1{font-size:clamp(42px,5.8vw,66px)}.campaign-contact-sheet{gap:12px}.campaign-select{grid-template-columns:1fr;gap:7px}.campaign-thumbnail img{width:100%;height:70px}.campaign-edit-label{display:flex;gap:8px;align-items:baseline;font-size:10px}.campaign-select[aria-pressed="true"] .campaign-edit-number::after{display:none}.campaign-caption{gap:12px;flex-wrap:wrap}.campaign-stage{padding-right:4vw}.campaign-media{min-height:350px}}
+  @media(max-width:800px){.campaign{grid-template-columns:1fr}.campaign-copy{padding:34px 6vw 24px;min-height:0}h1{font-size:clamp(43px,12vw,70px);margin-bottom:20px}.campaign-copy>p{font-size:12px}.campaign-actions{margin-top:24px;gap:14px 20px}.campaign-actions .button{font-size:11px}.campaign-contact-sheet{margin-top:28px;gap:14px;max-width:none}.campaign-thumbnail img{height:82px}.campaign-edit-label{font-size:10px;gap:6px}.campaign-caption{display:none}.campaign-stage{padding:0 6vw 24px}.campaign-media{flex:auto;min-height:0;height:390px}.campaign-media>img{object-position:center 38%}.campaign-product{gap:12px}.campaign-product strong{font-size:12px}.campaign-product :global(svg){margin-right:3px}.campaign-bottom{padding-inline:6vw;gap:12px;font-size:9px}.campaign-bottom>span:nth-child(2){display:none}.brand-promise{display:grid;grid-template-columns:1fr 1fr;padding:22px 6vw;gap:16px 22px;font-size:9px}}
+</style>

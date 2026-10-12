@@ -1,236 +1,61 @@
-/**
- * DEWY CO. — fictional millennial beauty brand for the
- * awesome-design-md repo test (Clay DESIGN.md applied to beauty).
- *
- * Single source of truth for all copywriting and product data.
- * Component files import only what they need from here.
- */
+export const image = (name: string) => `${import.meta.env.BASE_URL.replace(/\/$/, '')}/images/${name}.jpg`;
 
-export type CardVariant = 'pink' | 'teal' | 'lavender' | 'peach' | 'ochre' | 'cream';
-
+export type Shade = { name: string; color: string };
 export type Product = {
   id: string;
   name: string;
   tagline: string;
-  price: string;
-  imageUrl: string;
-  cardVariant: CardVariant;
-};
-
-export type Testimonial = {
-  name: string;
-  role: string;
-  avatarUrl: string;
-  quote: string;
-};
-
-export type Ingredient = {
-  emoji: string;
-  name: string;
   description: string;
-  cardVariant: 'lavender' | 'peach' | 'ochre';
+  price: number;
+  category: 'Skin' | 'Lips' | 'Face' | 'Brows';
+  image: string;
+  detail: string;
+  shades: Shade[];
+  ritual: string;
 };
-
-export type FooterColumn = {
-  heading: string;
-  links: { label: string; href: string }[];
-};
-
-const UNSPLASH = (id: string, w = 800) =>
-  `https://images.unsplash.com/photo-${id}?w=${w}&auto=format&fit=crop&q=80`;
-
-const PRAVATAR = (n: number) => `https://i.pravatar.cc/200?img=${n}`;
 
 export const BRAND = {
   name: 'DEWY CO.',
-  tagline: 'Dewy skin, made fun.',
-  subtagline:
-    'Botanical-powered makeup that loves your skin back. Cruelty-free, vegan, made with intention.',
-  ctaPrimary: 'Try your shade',
-  ctaSecondary: 'Read the science',
+  tagline: 'A little ritual. A natural glow.',
+  subtagline: 'Skin-first makeup. Botanical ingredients. A little more you.',
   navLinks: [
-    { label: 'Shop', href: '#products' },
-    { label: 'Ritual', href: '#story' },
-    { label: 'Reviews', href: '#testimonials' },
-    { label: 'Ingredients', href: '#ingredients' },
+    { label: 'The collection', href: '#products' },
+    { label: 'Our philosophy', href: '#story' },
+    { label: 'The journal', href: '#journal' },
   ],
-  promiseBadges: ['Cruelty-free', 'Vegan', 'Made with botanicals'],
-  heroImageUrl: UNSPLASH('1522337660859-02fbefca4702', 1200),
+  promiseBadges: ['Skin-first formulas', 'Botanical ingredients', 'Vegan & cruelty-free'],
 };
 
-/**
- * Color rotation enforced per Clay rule:
- * pink → teal → lavender → peach → ochre → cream (no adjacent repeats)
- */
-export const PRODUCTS: Product[] = [
-  {
-    id: 'glow-drops',
-    name: 'Glow Drops Serum',
-    tagline: 'Luminous skincare hybrid with niacinamide + hyaluronic acid.',
-    price: '$28',
-    imageUrl: UNSPLASH('1556228453-efd6c1ff04f6'),
-    cardVariant: 'pink',
-  },
-  {
-    id: 'petal-tint',
-    name: 'Petal Lip Tint',
-    tagline: 'Buildable lip stain in five botanical shades.',
-    price: '$18',
-    imageUrl: UNSPLASH('1583241475880-083f84372725'),
-    cardVariant: 'teal',
-  },
-  {
-    id: 'cloud-blush',
-    name: 'Cloud Cushion Blush',
-    tagline: 'Whipped cream blush that melts into a soft flush.',
-    price: '$22',
-    imageUrl: UNSPLASH('1559056199-641a0ac8b55e'),
-    cardVariant: 'lavender',
-  },
-  {
-    id: 'halo-stick',
-    name: 'Halo Highlight Stick',
-    tagline: 'Multi-use illuminator for cheeks, eyes, and collarbones.',
-    price: '$24',
-    imageUrl: UNSPLASH('1631730486647-8be7e7b51ce4'),
-    cardVariant: 'peach',
-  },
-  {
-    id: 'velvet-brow',
-    name: 'Velvet Brow Gel',
-    tagline: 'Flexible-hold brow setter with feather-fine fibers.',
-    price: '$20',
-    imageUrl: UNSPLASH('1607779097040-26e80aa78e66'),
-    cardVariant: 'ochre',
-  },
-  {
-    id: 'dewy-mist',
-    name: 'Dewy Mist Setting Spray',
-    tagline: 'Botanical hydrating finish that locks in glow all day.',
-    price: '$26',
-    imageUrl: UNSPLASH('1605973029521-8154da591bd7'),
-    cardVariant: 'cream',
-  },
+export const CAMPAIGNS = [
+  { label: 'Natural glow', image: 'hero', alt: 'Beauty campaign: a close-up portrait with luminous skin in warm light', productId: 'glow-drops' },
+  { label: 'Everyday ritual', image: 'ritual', alt: 'Beauty campaign: a quiet moment in a personal skincare ritual', productId: 'dewy-mist' },
+  { label: 'Soft colour', image: 'blush', alt: 'Beauty campaign: softly blended cheek colour in a studio portrait', productId: 'cloud-blush' },
 ];
 
-export const FEATURED_PRODUCT = {
-  ...PRODUCTS[0],
-  longDescription:
-    'Our signature Glow Drops blend niacinamide with low-molecular hyaluronic acid and botanical squalane — a serum that wears beautifully under makeup or solo on bare skin.',
-  ingredients: ['Niacinamide 5%', 'Hyaluronic Acid', 'Squalane', 'Centella Asiatica'],
-  imageUrl: UNSPLASH('1535585209827-a15fcdbc4c2d', 1000),
-};
+export const PRODUCTS: Product[] = [
+  { id: 'glow-drops', name: 'Glow Drops Serum', tagline: 'Your skin, in its best light.', description: 'A luminous skincare hybrid with niacinamide, hyaluronic acid and botanical squalane. Wear alone or as the first step in your makeup ritual.', price: 28, category: 'Skin', image: 'serum', detail: 'Niacinamide · Hyaluronic acid', shades: [], ritual: 'Smooth a few drops onto clean skin before makeup.' },
+  { id: 'petal-tint', name: 'Petal Lip Tint', tagline: 'A whisper of colour.', description: 'A buildable botanical lip tint. One layer for a hint of colour; another for a little more expression. Five shades to make your own.', price: 18, category: 'Lips', image: 'lips', detail: 'Sheer colour · Buildable finish', shades: [{name:'Petal',color:'petal'},{name:'Rose',color:'rose'},{name:'Fig',color:'fig'},{name:'Nude',color:'nude'},{name:'Poppy',color:'poppy'}], ritual: 'Tap onto the centre of your lips and blend outward.' },
+  { id: 'cloud-blush', name: 'Cloud Cushion Blush', tagline: 'The art of a soft flush.', description: 'Whipped cream blush that melts into a soft flush. A skin-first approach to a little colour, with a texture made for fingertips.', price: 22, category: 'Face', image: 'blush', detail: 'Whipped cream · Soft flush', shades: [{name:'Petal',color:'petal'},{name:'Rose',color:'rose'},{name:'Fig',color:'fig'}], ritual: 'Press a small amount onto cheeks and blend with your fingertips.' },
+  { id: 'halo-stick', name: 'Halo Highlight Stick', tagline: 'Catch the light. Keep it.', description: 'A multi-use illuminator for cheeks, eyes and collarbones. The finishing touch for a light-catching, luminous look.', price: 24, category: 'Face', image: 'highlight', detail: 'Multi-use · Luminous finish', shades: [{name:'Pearl',color:'pearl'},{name:'Golden',color:'golden'}], ritual: 'Glide across the high points of your face and gently blend.' },
+  { id: 'velvet-brow', name: 'Velvet Brow Gel', tagline: 'A little shape. Still you.', description: 'A flexible-hold brow setter with feather-fine fibres. Brush into your own shape, without losing the softness.', price: 20, category: 'Brows', image: 'brow', detail: 'Flexible hold · Feather-fine fibres', shades: [{name:'Soft brown',color:'brown'},{name:'Deep brown',color:'deep'}], ritual: 'Brush upward from the inner brow, then shape toward the tail.' },
+  { id: 'dewy-mist', name: 'Dewy Mist Setting Spray', tagline: 'One last moment of dew.', description: 'A botanical hydrating mist to finish your makeup ritual. A light finishing step when your skin wants a little refresh.', price: 26, category: 'Skin', image: 'mist', detail: 'Botanical mist · Hydrating finish', shades: [], ritual: 'Close your eyes and mist lightly over your finished look.' },
+];
 
 export const BRAND_STORY = {
-  eyebrow: 'Why we exist',
   headline: 'Makeup should love your skin back.',
   paragraphs: [
-    'DEWY CO. started in a small Jakarta apartment with a simple frustration: every product on our vanity either looked good or felt good — almost never both. So we set out to make makeup that does both, with botanical actives that earn their place on your face.',
-    'Three years and twenty-six formulations later, every DEWY product is built around skin-first ingredients. We test on humans, never animals, and we name the actives on the front of the box — not buried in a paragraph of fine print on the back.',
+    'Our story began in a small Jakarta apartment, with a simple thought: why choose between makeup that looks good and makeup that feels good?',
+    'We make skin-first essentials with botanical ingredients and everyday rituals in mind. Less covering up. More coming into your own. This is beauty, on your terms.',
   ],
 };
-
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    name: 'Maya Anggraini',
-    role: 'Editor at Bazaar Indonesia',
-    avatarUrl: PRAVATAR(48),
-    quote:
-      'The Glow Drops have replaced three serums in my routine. My skin actually looks better at the end of a 12-hour shoot day.',
-  },
-  {
-    name: 'Sasha Lim',
-    role: 'Skincare creator',
-    avatarUrl: PRAVATAR(44),
-    quote:
-      'I have rosacea and most blushes light up my cheeks for the wrong reason. The Cloud Cushion is the first one in years that just looks like a flush.',
-  },
-  {
-    name: 'Priya Reddy',
-    role: 'Makeup artist',
-    avatarUrl: PRAVATAR(32),
-    quote:
-      'Petal Lip Tint is in my kit for every wedding now. It builds, it lasts, and brides actually want to keep it after.',
-  },
-  {
-    name: 'Alia Fauzia',
-    role: 'Long-time customer',
-    avatarUrl: PRAVATAR(45),
-    quote:
-      'I bought DEWY for the look. I keep buying it because my skin is genuinely calmer now than it was a year ago.',
-  },
+export const INGREDIENTS = [
+  { name: 'Hyaluronic acid', benefit: 'A little drink for your skin.', description: 'A moisture-binding ingredient in Glow Drops. Think of it as the hydrating step at the beginning of your ritual, not a replacement for your full skincare routine.' },
+  { name: 'Niacinamide', benefit: 'The thoughtful everyday essential.', description: 'Also known as vitamin B3, niacinamide is part of our skin-first Glow Drops formula. Explore the ingredients behind the finish; individual experiences vary.' },
+  { name: 'Botanical squalane', benefit: 'Softness, from the first drop.', description: 'An emollient in Glow Drops that brings a soft, comfortable feel to your ritual. Botanical ingredients are a formulation choice, not a promise that every skin will respond the same way.' },
 ];
-
-export const INGREDIENTS: Ingredient[] = [
-  {
-    emoji: '💧',
-    name: 'Hyaluronic Acid',
-    description:
-      'Low-molecular form that draws moisture deeper into the skin instead of just sitting on top.',
-    cardVariant: 'lavender',
-  },
-  {
-    emoji: '✨',
-    name: 'Niacinamide 5%',
-    description:
-      'Vitamin B3 at the clinically meaningful concentration. Smooths texture, fades discoloration, and respects the barrier.',
-    cardVariant: 'peach',
-  },
-  {
-    emoji: '🍊',
-    name: 'Vitamin C (THD Ascorbate)',
-    description:
-      'A stable, oil-soluble form of vitamin C that brightens without the sting of L-ascorbic acid.',
-    cardVariant: 'ochre',
-  },
+export const JOURNAL = [
+  {title:'The beauty of doing less.',description:'Meet your three-step morning ritual: prepare, bring a little colour, and finish in your own light.',image:'journal-skin',productId:'glow-drops'},
+  {title:'Find your everyday flush.',description:'Fingertips, a little cream blush, and a moment in the mirror. Make soft colour your own.',image:'story',productId:'cloud-blush'},
+  {title:'A lip look that feels like you.',description:'One sheer layer or a little more? Discover the small ritual behind a buildable botanical tint.',image:'journal-lips',productId:'petal-tint'},
 ];
-
-export const EMAIL_CAPTURE = {
-  eyebrow: 'Join the dew list',
-  headline: 'First access. Quiet drops. Never spam.',
-  body: 'Early-bird pricing on new launches and the occasional skincare deep-dive. Unsubscribe in one click.',
-  placeholder: 'your@email.com',
-  cta: 'Keep me posted',
-};
-
-export const FOOTER: { columns: FooterColumn[]; tagline: string } = {
-  tagline: '© 2026 DEWY CO. — Made with intention in Jakarta.',
-  columns: [
-    {
-      heading: 'Shop',
-      links: [
-        { label: 'All products', href: '#' },
-        { label: 'Skincare', href: '#' },
-        { label: 'Makeup', href: '#' },
-        { label: 'Bundles', href: '#' },
-      ],
-    },
-    {
-      heading: 'Learn',
-      links: [
-        { label: 'The Ritual', href: '#' },
-        { label: 'Ingredients', href: '#' },
-        { label: 'Journal', href: '#' },
-        { label: 'Quiz', href: '#' },
-      ],
-    },
-    {
-      heading: 'Care',
-      links: [
-        { label: 'Shipping', href: '#' },
-        { label: 'Returns', href: '#' },
-        { label: 'FAQ', href: '#' },
-        { label: 'Contact', href: '#' },
-      ],
-    },
-    {
-      heading: 'Brand',
-      links: [
-        { label: 'About', href: '#' },
-        { label: 'Sustainability', href: '#' },
-        { label: 'Press', href: '#' },
-        { label: 'Careers', href: '#' },
-      ],
-    },
-  ],
-};
+export const money = (value: number) => new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(value);
