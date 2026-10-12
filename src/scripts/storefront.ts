@@ -1,5 +1,6 @@
 import { PRODUCTS, image, money } from '../data/content';
 import { initializeCampaign, selectCampaign } from './campaign';
+import { filterCollection, acknowledgeBag, revealRitual, revealMenu } from './motion';
 
 type BagItem = { id: string; shade: string; quantity: number };
 const storageKey = 'dewy-atelier-bag';
@@ -85,6 +86,7 @@ menuToggle.addEventListener('click', () => {
   menuToggle.setAttribute('aria-expanded', String(expanded));
   menuToggle.setAttribute('aria-label', expanded ? 'Close menu' : 'Open menu');
   mobileMenu.hidden = !expanded;
+  if (expanded) revealMenu();
 });
 mobileMenu.addEventListener('click', event => {
   if (!(event.target instanceof Element) || !event.target.closest('a,button')) return;
@@ -129,6 +131,7 @@ document.addEventListener('click', event => {
     if (existing) existing.quantity++;
     else bag.push({id:selectedProduct.id,shade:selectedShade,quantity:1});
     updateBag();
+    acknowledgeBag();
     productDetail.querySelector('[data-add-status]')!.textContent = `Added ${selectedProduct.name}${selectedShade?' in '+selectedShade:''} to your bag.${storageAvailable?'':' Browser storage is unavailable; your bag lasts for this visit only.'}`;
     button.textContent = `Add another · ${money(selectedProduct.price)}`;
     return;
@@ -140,6 +143,7 @@ document.addEventListener('click', event => {
     item.quantity = Math.min(99,item.quantity+Number(button.dataset.delta));
     if (item.quantity < 1) bag.splice(index,1);
     updateBag();
+    acknowledgeBag();
     const nextControl = bagContent.querySelector<HTMLButtonElement>(`[data-quantity="${Math.min(index,bag.length-1)}"][data-delta="${button.dataset.delta}"]`) ?? bagContent.querySelector<HTMLButtonElement>('[data-continue]');
     nextControl?.focus();
     announce('Bag updated.');
@@ -147,16 +151,13 @@ document.addEventListener('click', event => {
   }
   if (button.dataset.remove !== undefined) {
     bag.splice(Number(button.dataset.remove),1);updateBag();
+    acknowledgeBag();
     bagContent.querySelector<HTMLButtonElement>('[data-remove], [data-continue]')?.focus();
     announce('Item removed from your bag.');return;
   }
   if (button.hasAttribute('data-continue')) { bagDialog.close(); document.querySelector('#products')?.scrollIntoView({behavior:'auto'}); return; }
   if (button.dataset.filter) {
-    const filter = button.dataset.filter;
-    document.querySelectorAll<HTMLElement>('[data-filter]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.filter===filter)));
-    let count = 0;
-    document.querySelectorAll<HTMLElement>('.product-card').forEach(card=>{card.hidden=filter!=='All'&&card.dataset.category!==filter;if(!card.hidden)count++;});
-    document.querySelector('[data-product-count]')!.textContent = `${count} ${count===1?'essential':'essentials'}`;
+    filterCollection(button.dataset.filter);
     return;
   }
   if (button.dataset.campaign !== undefined) {
@@ -175,6 +176,7 @@ quizForm.addEventListener('submit', event => {
   quizResults.innerHTML = `<h3 class="section-heading" tabindex="-1">${colour?'A little colour, a lot of you.':'Your naturally luminous ritual.'}</h3><p>${full?'A few thoughtful steps to take your time with.':'Two essentials. A beautifully simple place to start.'}</p><div class="quiz-results">${ids.map(id=>{const p=PRODUCTS.find(product=>product.id===id)!;return `<article class="quiz-result"><img src="${image(p.image)}" alt="Illustrative ${p.category.toLowerCase()} photography" width="75" height="94"><div><h3>${p.name}</h3><p>${p.tagline} · ${money(p.price)}</p><button data-product="${p.id}">Explore this essential</button></div></article>`;}).join('')}</div><button class="button button-outline" data-retake>Try another ritual</button><p class="notice">Suggestions based on your preferences, not a skin diagnosis. Choose the products that feel right for you.</p>`;
   quizForm.hidden=true;
   quizResults.hidden=false;
+  revealRitual();
   quizResults.querySelector<HTMLElement>('h3')?.focus();
 });
 
