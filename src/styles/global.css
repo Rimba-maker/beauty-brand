@@ -53,7 +53,7 @@ input{caret-color:var(--color-plum)}
 .notice{font-size:11px;color:var(--color-muted);line-height:1.6}
 .swatch{width:24px;height:24px;border-radius:50%;background:var(--swatch);border:1px solid color-mix(in srgb,var(--color-espresso) 20%,transparent)}
 .shade-petal{--swatch:var(--shade-petal)}.shade-rose{--swatch:var(--shade-rose)}.shade-fig{--swatch:var(--shade-fig)}.shade-nude{--swatch:var(--shade-nude)}.shade-poppy{--swatch:var(--shade-poppy)}.shade-pearl{--swatch:var(--shade-pearl)}.shade-golden{--swatch:var(--shade-golden)}.shade-brown{--swatch:var(--shade-brown)}.shade-deep{--swatch:var(--shade-deep)}
-.dialog{border:0;padding:0;color:var(--color-espresso);background:var(--color-paper);width:min(920px,calc(100% - 40px));max-height:90dvh;overflow:hidden;box-shadow:0 20px 80px #39291f26}
+.dialog{margin:auto;border:0;padding:0;color:var(--color-espresso);background:var(--color-paper);width:min(920px,calc(100% - 40px));max-height:90dvh;overflow:hidden;box-shadow:0 20px 80px #39291f26}
 .dialog-scroll{max-height:90dvh;overflow:auto;overscroll-behavior:contain}
 .bag-dialog .dialog-scroll{height:100dvh;max-height:100dvh}
 .dialog::backdrop{background:#39291f70}
